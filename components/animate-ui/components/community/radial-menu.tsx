@@ -747,7 +747,7 @@ export function RadialMenu({
   }
 
   return (
-    <div className="relative isolate w-full max-w-7xl mx-auto rounded-[2.5rem] overflow-hidden">
+    <div className="relative isolate flex w-full max-w-7xl mx-auto rounded-[2.5rem] overflow-hidden">
       {/* ================= ARRIÈRE-PLAN DYNAMIQUE : chaque service illustre le fond à tour de rôle ================= */}
       {/* Masqué en mode minimal (page 1) : il ne doit rester que la roue + le chargement, rien d'autre en fond */}
       {!isMinimal && (
@@ -798,7 +798,12 @@ export function RadialMenu({
               </motion.div>
             </AnimatePresence>
           </div>
-        )}
+      )}
+      </div>
+      {/* ================= COLONNE CENTRALE : LE MENU RADIAL ================= */}
+      <div className={`${activePage !== 1 ? "" : "grid-cols-1"} flex relative items-center justify-center select-none w-full`}>
+
+
 
         {/* ================= COLONNE CENTRALE : LE MENU RADIAL ================= */}
         <div
