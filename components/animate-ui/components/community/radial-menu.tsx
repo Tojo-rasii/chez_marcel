@@ -771,7 +771,7 @@ export function RadialMenu({
         </div>
       )}
 
-      <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center px-4 py-8">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4 py-8">
 
         {/* ================= COLONNE GAUCHE : DESCRIPTION (HOVER/AUTOPLAY) ================= */}
         {/* Masquée en mode minimal (page 1) : on ne garde que la roue + le chargement */}
@@ -800,6 +800,7 @@ export function RadialMenu({
           </div>
       )}
       </div>
+
       {/* ================= COLONNE CENTRALE : LE MENU RADIAL ================= */}
       <div className={`${activePage !== 1 ? "" : "grid-cols-1"} flex relative items-center justify-center select-none w-full`}>
 
