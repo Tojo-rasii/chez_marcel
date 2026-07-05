@@ -19,6 +19,8 @@ export default function HeroPagination({ activePage, setActivePage }:any) {
                 onClick={(e) => {
                   e.preventDefault();
                   setActivePage(page);
+
+
                 }}
                 className={`
                   p-0 bg-none font-heading

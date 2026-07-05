@@ -22,7 +22,7 @@ type RadialMenuProps = {
   innerGap?: number;
   outerGap?: number;
   outerRingWidth?: number;
-  activePage: any;
+  activePage?: any;
   onSelect?: (item: MenuItem) => void;
 };
 
@@ -128,46 +128,51 @@ export function RadialMenu({
   const circumference = 2 * Math.PI * progressRingRadius;
   const strokeDashoffset = circumference - (progress / 100) * circumference;
 
-  return (
-    <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center px-4 py-8">
-      
-      {/* ================= COLONNE GAUCHE : DESCRIPTION (HOVER/AUTOPLAY) ================= */}
-      <div className="lg:col-span-3 space-y-4 flex flex-col justify-center min-h-[280px]">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeIndex}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 20 }}
-            transition={{ duration: 0.3 }}
-            className="space-y-3"
-          >
-            <span className="text-xs font-bold uppercase tracking-wider text-violet-600 dark:text-violet-400 bg-violet-100 dark:bg-violet-950/50 px-3 py-1 rounded-full inline-block">
-              {menuItems[activeIndex]?.label}
-            </span>
-            <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-neutral-50 tracking-tight">
-              {menuItems[activeIndex]?.title}
-            </h2>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed balance">
-              {menuItems[activeIndex]?.description}
-            </p>
-          </motion.div>
-        </AnimatePresence>
-      </div>
 
-      {/* ================= COLONNE CENTRALE : LE MENU RADIAL ================= */}
-      <div className="lg:col-span-6 flex relative items-center justify-center select-none w-full">
-        
-        {/* Pagination GAUCHE */}
-        {pageNumber === 2 && (
-          <div className="absolute left-[-100px] hidden xl:flex flex-col items-center justify-center w-24 text-center">
-            <span className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">Suivant</span>
-            <div className="flex items-center gap-1 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-              <ChevronLeft className="size-3 animate-pulse" />
-              <span className="truncate max-w-[80px]">{nextItem?.label}</span>
-            </div>
+  console.log(pageNumber, activePage);
+
+  return (
+    <div className={`${activePage !== 1 ? "flex" : "grid-cols-1"} w-full mx-auto  gap-12 items-center px-4 py-8`}>
+
+      {/* ================= COLONNE GAUCHE : DESCRIPTION (HOVER/AUTOPLAY) ================= */}
+      {activePage !== 1 && (
+        <div className="lg:col-span-3 space-y-4 flex flex-col justify-center min-h-[280px]">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-3"
+            >
+              <span className="text-xs font-bold uppercase tracking-wider text-violet-600 dark:text-violet-400 bg-violet-100 dark:bg-violet-950/50 px-3 py-1 rounded-full inline-block">
+                {menuItems[activeIndex]?.label}
+              </span>
+              <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-neutral-50 tracking-tight">
+                {menuItems[activeIndex]?.title}
+              </h2>
+              <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed balance">
+                {menuItems[activeIndex]?.description}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      )}
+      {/* Pagination GAUCHE */}
+      {activePage !== 1 && (
+        <div className="absolute left-[-100px] hidden xl:flex flex-col items-center justify-center w-24 text-center">
+          <span className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">Suivant</span>
+          <div className="flex items-center gap-1 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+            <ChevronLeft className="size-3 animate-pulse" />
+            <span className="truncate max-w-[80px]">{nextItem?.label}</span>
           </div>
-        )}
+        </div>
+      )}
+      {/* ================= COLONNE CENTRALE : LE MENU RADIAL ================= */}
+      <div className={`${activePage !== 1 ? "" : "grid-cols-1"} flex relative items-center justify-center select-none w-full`}>
+
+
 
         {/* Menu Radial Disque */}
         <motion.div
@@ -290,68 +295,71 @@ export function RadialMenu({
           </svg>
         </motion.div>
 
-        {/* Pagination DROITE */}
-        {pageNumber === 2 && (
-          <div className="absolute right-[-100px] hidden xl:flex flex-col items-center justify-center w-24 text-center">
-            <span className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">Précédent</span>
-            <div className="flex items-center gap-1 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-              <span className="truncate max-w-[80px]">{prevItem?.label}</span>
-              <ChevronRight className="size-3 animate-pulse" />
-            </div>
+      </div>
+
+      {/* Pagination DROITE */}
+      {activePage !== 1 && (
+        <div className="absolute right-[-100px] hidden xl:flex flex-col items-center justify-center w-24 text-center">
+          <span className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">Précédent</span>
+          <div className="flex items-center gap-1 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+            <span className="truncate max-w-[80px]">{prevItem?.label}</span>
+            <ChevronRight className="size-3 animate-pulse" />
           </div>
-        )}
-      </div>
-
+        </div>
+      )}
       {/* ================= COLONNE DROITE : LES ACTION BUTTONS (CLIC) ================= */}
-      <div className="lg:col-span-3 min-h-[280px] flex flex-col justify-center">
-        <AnimatePresence mode="wait">
-          {selectedItem ? (
-            <motion.div
-              key={selectedItem.id}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
-              className="space-y-3 bg-white dark:bg-neutral-900 p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm"
-            >
-              <div className="mb-4">
-                <p className="text-xs font-semibold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">Option choisie</p>
-                <h4 className="text-base font-bold text-neutral-900 dark:text-white truncate">{selectedItem.label}</h4>
+      {activePage !== 1 && (
+        <div className="lg:col-span-3 min-h-[280px] flex flex-col justify-center">
+          <AnimatePresence mode="wait">
+            {selectedItem ? (
+              <motion.div
+                key={selectedItem.id}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                className="space-y-3 bg-white dark:bg-neutral-900 p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm"
+              >
+                <div className="mb-4">
+                  <p className="text-xs font-semibold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">Option choisie</p>
+                  <h4 className="text-base font-bold text-neutral-900 dark:text-white truncate">{selectedItem.label}</h4>
+                </div>
+
+                <button
+                  onClick={() => alert(`Commande lancée pour : ${selectedItem.label}`)}
+                  className="w-full py-3 px-4 flex items-center justify-center gap-2 bg-violet-600 hover:bg-violet-700 active:scale-[0.98] text-white font-medium text-sm rounded-xl shadow-sm transition-all"
+                >
+                  <ShoppingCart size={16} />
+                  Commander
+                </button>
+
+                <button
+                  onClick={() => alert(`Ajouté à la liste d'attente : ${selectedItem.label}`)}
+                  className="w-full py-3 px-4 flex items-center justify-center gap-2 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 active:scale-[0.98] text-neutral-900 dark:text-neutral-100 font-medium text-sm rounded-xl transition-all"
+                >
+                  <Calendar size={16} />
+                  Liste d'attente
+                </button>
+
+                <button
+                  onClick={() => alert(`Ouverture du catalogue de : ${selectedItem.label}`)}
+                  className="w-full py-3 px-4 flex items-center justify-center gap-2 border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800 active:scale-[0.98] text-neutral-700 dark:text-neutral-300 font-medium text-sm rounded-xl transition-all"
+                >
+                  <BookOpen size={16} />
+                  Catalogue
+                </button>
+              </motion.div>
+            ) : (
+              <div className="flex h-full flex-col items-center justify-center p-6 border-2 border-dashed border-neutral-200 dark:border-neutral-800 rounded-2xl text-center">
+                <p className="text-xs text-neutral-400 dark:text-neutral-500 font-medium max-w-[180px]">
+                  Cliquez sur un service du menu pour débloquer les actions de réservation.
+                </p>
               </div>
+            )}
+          </AnimatePresence>
+        </div>
+      )}
 
-              <button 
-                onClick={() => alert(`Commande lancée pour : ${selectedItem.label}`)}
-                className="w-full py-3 px-4 flex items-center justify-center gap-2 bg-violet-600 hover:bg-violet-700 active:scale-[0.98] text-white font-medium text-sm rounded-xl shadow-sm transition-all"
-              >
-                <ShoppingCart size={16} />
-                Commander
-              </button>
-
-              <button 
-                onClick={() => alert(`Ajouté à la liste d'attente : ${selectedItem.label}`)}
-                className="w-full py-3 px-4 flex items-center justify-center gap-2 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 active:scale-[0.98] text-neutral-900 dark:text-neutral-100 font-medium text-sm rounded-xl transition-all"
-              >
-                <Calendar size={16} />
-                Liste d'attente
-              </button>
-
-              <button 
-                onClick={() => alert(`Ouverture du catalogue de : ${selectedItem.label}`)}
-                className="w-full py-3 px-4 flex items-center justify-center gap-2 border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800 active:scale-[0.98] text-neutral-700 dark:text-neutral-300 font-medium text-sm rounded-xl transition-all"
-              >
-                <BookOpen size={16} />
-                Catalogue
-              </button>
-            </motion.div>
-          ) : (
-            <div className="flex h-full flex-col items-center justify-center p-6 border-2 border-dashed border-neutral-200 dark:border-neutral-800 rounded-2xl text-center">
-              <p className="text-xs text-neutral-400 dark:text-neutral-500 font-medium max-w-[180px]">
-                Cliquez sur un service du menu pour débloquer les actions de réservation.
-              </p>
-            </div>
-          )}
-        </AnimatePresence>
-      </div>
 
     </div>
   );

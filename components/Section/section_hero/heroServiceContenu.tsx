@@ -4,7 +4,7 @@ import * as React from 'react';
 import { RadialMenu } from '@/components/animate-ui/components/community/radial-menu';
 import { Scissors, ShieldCheck, CreditCard, Gamepad2 } from 'lucide-react';
 
-export default function HeroServiceContenu({ activePage }: any) {
+export default function HeroServiceContenu({ activePage, page }: any) {
     const MENU_ITEMS = [
         {
             id: 1,
@@ -41,9 +41,9 @@ export default function HeroServiceContenu({ activePage }: any) {
     ];
 
     return (
-        <div className="w-full min-h-screen flex items-center justify-center p-4 bg-neutral-50 dark:bg-neutral-950">
+        <div className="w-full flex items-center justify-center p-4 dark:bg-neutral-950">
             <RadialMenu
-                activePage={activePage}
+                activePage={page}
                 menuItems={MENU_ITEMS}
                 onSelect={(item) => console.log("Sélectionné :", item.label)}
             />
