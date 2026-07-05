@@ -95,6 +95,8 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+
+
 .font-sans{
   font-family: var(--font-sans);
 }

@@ -4,7 +4,7 @@ import NavLinks from "./navLinks";
 export default function NavbarUi() {
     return (
         <div className="absolute w-full top-0">
-            <div className="flex items-center justify-between h-16 p-5 bg-black text-white">
+            <div className="flex items-center justify-between h-16 p-5 text-current">
                 <Logo />
 
                 <div className="flex items-center justify-end">
