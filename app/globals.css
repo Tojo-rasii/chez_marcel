@@ -101,7 +101,7 @@
   font-family: var(--font-sans);
 }
 .font-heading{
-  font-family: var(--font-heading);
+  font-family: var(--font-heading)
 }
 .font-display{
   font-family: var(--font-display);

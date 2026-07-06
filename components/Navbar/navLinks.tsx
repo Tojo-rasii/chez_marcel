@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { HamburgerMenuOverlay } from "@/components/lightswind/hamburger-menu-overlay"
+import { TextAlignStart, Globe, SeparatorVertical } from "lucide-react";
+import { Separator } from "../lightswind/separator";
 
 export default function NavLinks() {
 
@@ -22,7 +24,7 @@ export default function NavLinks() {
   return (
     <div className="flex items-center justify-center gap-5">
 
-      <ul className="flex items-center max-md:hidden gap-5 font-heading text-xl">
+      <ul className="flex items-center max-md:hidden gap-7 font-heading text-lg">
         {nav.map((item, index) => (
           <li key={index}>
             <p className="hover:text-blue-500 capitalize cursor-pointer transition-colors duration-300">
@@ -32,14 +34,12 @@ export default function NavLinks() {
         ))}
       </ul>
 
-      {/* <div className="relative bg-red-500 max-md:flex hidden">
-        <HamburgerMenuOverlay items={nav} buttonTop="0"
-          buttonLeft="0"
-          buttonColor="none"
-          overlayBackground="none" />
+      {/* <Separator position="vertical"/> */}
 
-      </div> */}
-
+      <div className="flex items-center gap-5 ms-10">
+        <Globe className="size-5" />
+        <TextAlignStart className="size-5" />
+      </div>
     </div>
   );
 }

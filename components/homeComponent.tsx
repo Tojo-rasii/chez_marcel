@@ -4,7 +4,7 @@ import SectionHomeComponent from "./Section/sectionHomeComponent";
 
 export default function HomeComponent() {
     return (
-        <div className="bg-gray-400 h-screen">
+        <div className="bg-black h-screen">
             <NavbarUi />
             <SectionHomeComponent />
         </div>

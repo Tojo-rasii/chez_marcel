@@ -2,17 +2,17 @@ import Image from "next/image";
 
 export default function FooterNewsLetter() {
   return (
-    <div className="relative w-full max-w-xl mx-auto my-8">
+    <div className="relative w-full max-w-lg mt-5 -mb-8 float-end me-3 my-0">
       {/* Conteneur principal avec effet d'ombre pleine noire décalée */}
-      <div className="bg-white border border-black p-8 pt-10 pb-12 shadow-[16px_16px_0px_0px_#1a1a1a] relative flex flex-col gap-6">
+      <div className="bg-white border border-black p-5 pt-5 pb-8 shadow-[16px_16px_0px_0px_#1a1a1a] relative flex flex-col gap-6">
         
         {/* Titre au style Serif élégant */}
         <h3 className="text-2xl font-serif tracking-wider text-black uppercase">
-          LOREM IPSUM
+          NEWSLETTERS
         </h3>
         
         {/* Champ de saisie souligné */}
-        <div className="mt-4 mb-4">
+        <div className="mt-4 mb-5">
           <input
             type="email"
             placeholder="Entrez votre email"

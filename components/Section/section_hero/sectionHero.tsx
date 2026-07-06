@@ -35,7 +35,7 @@ export default function SectionHero({ activePage }: any) {
   );
 
   return (
-    <div className="p-5 h-full">
+    <div className="p-5 h-[80vh] w-full  bg-red-500">
       <div
         ref={gridRef}
         className={`grid ${activePage === 2 ? "grid-cols-1" : ""} grid-cols-1 ${
@@ -53,7 +53,7 @@ export default function SectionHero({ activePage }: any) {
         )}
 
         {activePage !== 3 && activePage !== 4 && activePage !== 5 && activePage !== 6 && (
-          <div className="h-full m-auto w-full flex items-center justify-center">
+          <div className="h-full m-auto bg-red-200 w-full flex items-center justify-center">
             <HeroServiceContenu page={activePage} />
           </div>
         )}

@@ -9,7 +9,7 @@ import {
 
 export default function HeroPagination({ activePage, setActivePage }:any) {
   return (
-    <div className="bg-gray-500 m-5 p-5">
+    <div className="bg-red-500 p-2 px-5">
       <Pagination>
         <PaginationContent className="gap-8">
           {[1, 2, 3, 4, 5, 6].map((page) => (

@@ -1,11 +1,14 @@
+import { Separator } from "@/components/lightswind/separator";
 import Image from "next/image";
 
 export default function HeroDescription({ page }: any) {
   return (
-    <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-10 rounded-3xl shadow-2xl text-white max-w-2xl">
-      <div className="flex flex-col gap-6">
-        <span className="font-semibold tracking-wider uppercase text-sm">Bienvenue chez Marcel Click & Services</span>
-        <h1 className="font-heading text-4xl md:text-5xl leading-tight text-yellow-500 ">
+    <div className="text-white bg-red-500">
+      <div className="flex flex-col gap-5">
+        <h3 className="font-heading text-2xl flex items-center gap-3">
+                    <Separator className="w-8 h-0.5 bg-white/50"/><span>Bienvenue chez Marcel Click & Services</span> 
+                </h3>
+        <h1 className="font-heading uppercase text-2xl leading-relaxed font-semibold md:text-4xl text-yellow-500 ">
           Votre guichet unique pour tous vos besoins quotidiens
         </h1>
         <p className="text-gray-200 leading-relaxed">

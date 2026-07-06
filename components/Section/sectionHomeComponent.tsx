@@ -89,8 +89,8 @@ export default function SectionHomeComponent() {
   }, []);
 
   return (
-    <div className="h-full pt-15 relative overflow-hidden">
-      <div ref={heroWrapperRef} className="h-full">
+    <div className="h-full pt-4 w-full relative overflow-hidden">
+      <div ref={heroWrapperRef} className="h-full flex items-center">
         <SectionHero activePage={activePage} />
       </div>
 

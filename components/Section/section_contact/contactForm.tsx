@@ -3,7 +3,7 @@ import { Mouse } from "lucide-react";
 
 export default function ContactForm() {
   return (
-    <div className="relative w-full max-w-xl mx-auto my-8">
+    <div className="relative w-full max-w-xl mx-auto my-0">
       {/* Conteneur principal avec effet d'ombre pleine noire décalée */}
       <div className="bg-white border border-black p-8 md:p-10 shadow-[20px_20px_0px_0px_#1a1a1a] flex flex-col gap-8">
         
@@ -12,7 +12,6 @@ export default function ContactForm() {
             LOREM IPSUM
           </h3>
           {/* Icône optionnelle si vous souhaitez l'intégrer discrètement */}
-          <Mouse className="text-black/40 w-5 h-5 hidden md:block" />
         </div>
 
         <form className="flex flex-col gap-10">
@@ -57,10 +56,10 @@ export default function ContactForm() {
           </div>
 
           {/* Bouton de soumission arrondi et centré */}
-          <div className="flex justify-center mt-4">
+          <div className="flex justify-end mt-2">
             <Button 
               type="submit" 
-              className="bg-[#1a1a1a] hover:bg-black text-white font-medium tracking-widest uppercase px-16 py-6 rounded-full text-xs transition-colors"
+              className="bg-[#1a1a1a] hover:bg-black text-white font-medium tracking-widest uppercase px-16 py-7 cursor-pointer w-full rounded-full text-md transition-colors"
             >
               ENVOYER
             </Button>
