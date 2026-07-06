@@ -452,7 +452,7 @@ function CalendarModal({
                 className={cn(
                   "py-2 rounded-lg text-xs font-medium border transition-colors",
                   selectedTime === time
-                    ? "bg-transparent border-yellow-500 text-neutral-900"
+                    ? "bg-transparent border-black text-neutral-900"
                     : "border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-300 hover:border-yellow-400"
                 )}
               >
@@ -572,7 +572,7 @@ function ThumbnailRail({
             aria-label={item.label}
             className={cn(
               "relative shrink-0 w-50 h-50  rounded-full overflow-hidden transition-all duration-300",
-              active ? " ring-2 ring-yellow-500 ring-offset-2 ring-offset-white dark:ring-offset-neutral-950" : "hidden size-9 opacity-70 hover:opacity-100"
+              active ? " ring-2 ring-black ring-offset-2 ring-offset-white dark:ring-offset-neutral-950" : "hidden size-9 opacity-70 hover:opacity-100"
             )}
           >
             <img
@@ -754,7 +754,7 @@ export function RadialMenu({
     <div className={`relative isolate ${!isMinimal && "grid grid-cols-3"} w-full mx-auto overflow-hidden`}>
       {/* ================= ARRIÈRE-PLAN DYNAMIQUE : chaque service illustre le fond à tour de rôle ================= */}
       {/* Masqué en mode minimal (page 1) : il ne doit rester que la roue + le chargement, rien d'autre en fond */}
-      {!isMinimal && (
+      {/* {!isMinimal && (
         <div className="absolute inset-0 -z-10">
           <AnimatePresence mode="sync">
             <motion.img
@@ -773,7 +773,7 @@ export function RadialMenu({
           </AnimatePresence>
           <div className="absolute inset-0 bg-gradient-to-b from-white/92 via-white/85 to-white/95 dark:from-neutral-950/92 dark:via-neutral-950/85 dark:to-neutral-950/95" />
         </div>
-      )}
+      )} */}
       {!isMinimal && (
         <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4 py-8">
 
@@ -790,9 +790,13 @@ export function RadialMenu({
                   transition={{ duration: 0.3 }}
                   className="space-y-4"
                 >
-                  <span className="text-md font-bold mb-2 font-heading uppercase text-yellow-700 dark:text-yellow-400 ">
+                  {/* <span className="text-md font-bold mb-2 font-heading uppercase text-black mb-4 dark:text-yellow-400 ">
                     {activeItem?.label}
-                  </span>
+                  </span> */}
+                  <h3 className="font-heading uppercase font-semibold text-md max-md:text-lg max-md:text-center flex items-center gap-3">
+
+                    <Separator className="w-5 h-0.5 bg-black/50" /><span>{activeItem?.label}</span>
+                  </h3>
                   <h2 className="text-4xl font-extrabold font-heading text-neutral-900 dark:text-neutral-50 tracking-tight">
                     {activeItem?.title}
                   </h2>
@@ -834,7 +838,7 @@ export function RadialMenu({
             animate={{ scale: 1, opacity: 1 }}
             transition={menuTransition}
             style={{ width: size, height: size }}
-            className="relative rounded-full overflow-hidden shadow-2xl bg-neutral-900/90 backdrop-blur-xl border border-neutral-800/60"
+            className="relative rounded-full overflow-hidden bg-white border border-neutral-800/60"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
@@ -865,17 +869,17 @@ export function RadialMenu({
                         handlePick(item);
                       }
                     }}
-                    className="cursor-pointer outline-none"
+                    className="cursor-pointer fill-black outline-none"
                   >
                     <path
                       d={outerPath}
-                      className={cn("transition-colors duration-300", active ? "fill-yellow-500/40" : "fill-transparent")}
+                      className={cn("transition-colors duration-300", active ? "fill-black" : "fill-white stroke-black/70")}
                     />
                     <path
                       d={wedgePath}
                       className={cn(
                         "transition-all duration-300 stroke-black/20 dark:stroke-white/5",
-                        active ? "fill-white/[0.08] stroke-yellow-500/30" : "fill-transparent"
+                        active ? "fill-black stroke-black/30" : "fill-transparent stroke-black/70"
                       )}
                     />
                     <foreignObject x={iconPos.x - 22} y={iconPos.y - 22} width={44} height={44}>
@@ -885,7 +889,7 @@ export function RadialMenu({
                           className={cn(
                             "flex items-center justify-center rounded-full transition-all duration-300 border",
                             active
-                              ? "size-9 bg-transparent/15 border-yellow-500/70 shadow-[0_0_0_3px_rgba(234,179,8,0.15)] scale-110"
+                              ? "size-9 bg-transparent/15 border-white scale-110"
                               : "size-8 bg-white/5 border-white/10 group-hover:border-white/30"
                           )}
                         >
@@ -894,7 +898,7 @@ export function RadialMenu({
                             strokeWidth={active ? 2.25 : 1.75}
                             className={cn(
                               "transition-colors duration-300",
-                              active ? "text-yellow-400" : "text-neutral-400"
+                              active ? "text-white" : "text-black/70"
                             )}
                           />
                         </div>
@@ -904,15 +908,15 @@ export function RadialMenu({
                 );
               })}
 
-              <circle cx={0} cy={0} r={centerRadius} className="fill-white/95 dark:fill-neutral-900/95" />
+              <circle cx={0} cy={0} r={centerRadius} className="fill-white dark:fill-neutral-900/95" />
 
               {/* Piste de fond de la barre de progression, visible même en pause */}
               <circle
                 cx={0}
                 cy={0}
                 r={progressRingRadius}
-                className="fill-none stroke-neutral-200/70 dark:stroke-white/5"
-                strokeWidth={3}
+                className="fill-none stroke-black/30 dark:stroke-white/5"
+                strokeWidth={1}
               />
 
               {!isPaused && (
@@ -920,7 +924,7 @@ export function RadialMenu({
                   cx={0}
                   cy={0}
                   r={progressRingRadius}
-                  className="fill-none stroke-yellow-500 transition-[stroke-dashoffset] duration-75 ease-linear"
+                  className="fill-none stroke-black transition-[stroke-dashoffset] duration-75 ease-linear"
                   strokeWidth={3}
                   strokeDasharray={circumference}
                   strokeDashoffset={strokeDashoffset}
@@ -937,10 +941,10 @@ export function RadialMenu({
                 className="pointer-events-none"
               >
                 <div className="flex flex-col h-full w-full items-center justify-center text-center p-4">
-                  <div className="mb-2 flex items-center justify-center size-14 rounded-full bg-yellow-50 dark:bg-yellow-950/40 border border-yellow-200 dark:border-yellow-900 text-yellow-600 dark:text-yellow-400 transition-transform duration-300">
+                  <div className="mb-2 flex items-center justify-center size-14 rounded-full bg-black dark:bg-yellow-950/40 border border-black dark:border-yellow-900 text-white dark:text-yellow-400 transition-transform duration-300">
                     {ActiveIcon && <ActiveIcon size={28} strokeWidth={1.75} />}
                   </div>
-                  <span className="text-base font-heading font-bold dark:text-neutral-100 tracking-tight">
+                  <span className="text-lg font-heading font-bold dark:text-neutral-100 tracking-tight">
                     {activeItem?.label}
                   </span>
                 </div>
@@ -967,7 +971,7 @@ export function RadialMenu({
       {/* ================= COLONNE DROITE : LES ACTION BUTTONS (CLIC) ================= */}
       {/* Masquée en mode minimal (page 1) : pas d'actions déclenchables ici */}
       {!isMinimal && (
-        <div className="min-h-full w-60 absolute right-9 z-9 flex flex-col justify-center">
+        <div className="min-h-full w-70 absolute right-9 z-9 flex flex-col justify-center">
           <AnimatePresence mode="wait">
             {selectedItem ? (
               <motion.div
@@ -976,8 +980,17 @@ export function RadialMenu({
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
-                className="space-y-3 bg-white dark:bg-neutral-900/90 p-5  border border-neutral-200 dark:border-neutral-800"
+                className="space-y-3 bg-white dark:bg-neutral-900/90 p-5  border border-neutral-400 dark:border-neutral-800"
               >
+
+                {/* X CLOSE BUTTON */}
+                <button
+                  onClick={() => setSelectedItem(null)}
+                  className="absolute top-2 cursor-pointer right-0 p-1 rounded-full text-neutral-500 hover:text-black border  dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
+                  aria-label="Close"
+                >
+                  <X size={20} />
+                </button>
                 <div className="mb-4 flex items-center flex-col">
 
                   <h3 className="font-heading text-sm py-0 flex items-center gap-2">
@@ -988,7 +1001,7 @@ export function RadialMenu({
 
                 <button
                   onClick={() => setActiveModal("history")}
-                  className="w-full py-3 uppercase px-4 flex items-center justify-center gap-2 bg-transparent hover:bg-yellow-400 active:scale-[0.98] text-neutral-900 font-semibold text-xs rounded-full transition-all  cursor-pointer"
+                  className="w-full py-3 uppercase px-4 flex items-center justify-center gap-2 bg-black/90 hover:bg-black active:scale-[0.98] text-white font-semibold text-xs rounded-full transition-all  cursor-pointer"
                 >
                   <ShoppingBag size={16} />
                   Commander
@@ -996,7 +1009,7 @@ export function RadialMenu({
 
                 <button
                   onClick={() => setActiveModal("calendar")}
-                  className="w-full py-3 uppercase px-4 flex items-center justify-center gap-2 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 active:scale-[0.98] text-neutral-900 dark:text-neutral-100 font-medium text-xs rounded-full  cursor-pointer transition-all"
+                  className="w-full py-3 uppercase px-4 flex items-center justify-center gap-2 bg-neutral-200 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 active:scale-[0.98] text-neutral-900 dark:text-neutral-100 font-medium text-xs rounded-full border-black/60 border  cursor-pointer transition-all"
                 >
                   <CalendarCheck2 size={16} />
                   Réserver
@@ -1004,7 +1017,7 @@ export function RadialMenu({
 
                 <button
                   onClick={() => setActiveModal("catalog")}
-                  className="w-full py-3 uppercase px-4 flex items-center justify-center gap-2 border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800 active:scale-[0.98] text-neutral-700 dark:text-neutral-300 font-medium text-xs rounded-full cursor-pointer transition-all"
+                  className="w-full py-3 uppercase px-4 flex items-center justify-center gap-2 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800 active:scale-[0.98] text-neutral-700 dark:text-neutral-300 font-medium text-xs rounded-full border-black/60 border cursor-pointer transition-all"
                 >
                   <LayoutGrid size={16} />
                   Catalogue

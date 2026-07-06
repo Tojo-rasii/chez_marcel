@@ -29,7 +29,7 @@ export default function PourquoiCard() {
                     cardData.map((card, index) => (
 
                         <div key={index} className="flex max-md:items-start max-md:w-full max-md:flex-row  relative flex-col items-center max-md:items-start gap-4">
-                            <div className="number min-w-18 min-h-18 max-md:min-w-12  max-md:min-h-12  flex items-center justify-center max-md:m-0 m-auto rounded-full bg-black ">
+                            <div className="number border-3 border-white outline-3 outline-black min-w-18 min-h-18 max-md:min-w-12  max-md:min-h-12  flex items-center justify-center max-md:m-0 m-auto rounded-full bg-black ">
                                 <span className="font-normal font-heading max-md:text-xl text-3xl text-white" >
                                     {card.number}
                                 </span>

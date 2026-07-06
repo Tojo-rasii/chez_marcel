@@ -111,7 +111,7 @@ const MENU_ITEMS: MenuItem[] = [
     description:
       "Dépôts et retraits via Mvola, Orange Money et Airtel Money en toute sécurité. Profitez de transactions rapides et fiables pour toutes vos opérations financières du quotidien.",
     image:
-      "https://images.unsplash.com/photo-1563013544-824ae1d704d3?q=80&w=1600&auto=format&fit=crop&crop=entropy",
+      "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=400&auto=format&fit=crop",
     catalogLabel: "Services disponibles",
     catalog: [
       {
@@ -186,7 +186,7 @@ type HeroServiceContenuProps = {
 
 export default function HeroServiceContenu({ activePage, page }: HeroServiceContenuProps) {
   return (
-    <div className="w-full max-md:absolute max-md:-bottom-70  max-md:p-0  max-md:scale-110 flex items-center justify-center p-4">
+    <div className="w-full max-md:absolute max-md:-bottom-70  max-md:p-0  max-md:scale-110 flex items-center justify-center">
       <RadialMenu
         activePage={page}
         menuItems={MENU_ITEMS}
