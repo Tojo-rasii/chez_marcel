@@ -29,16 +29,16 @@ export default function PourquoiCard() {
                     cardData.map((card, index) => (
                 
                     <div key={index} className="flex flex-col items-center gap-4">
-                    <div className="number min-w-18 min-h-18 flex items-center justify-center m-auto rounded-full bg-black ">
+                    <div className="number min-w-18 min-h-18 flex items-center justify-center m-auto rounded-full bg-yellow-500" >
                         <span className="font-normal font-heading  text-3xl text-white" >
                             {card.number}
                         </span>
                     </div>
                     <div className="title">
-                        <h1 className="text-3xl font-heading text-center">{card.title}</h1>
+                        <h1 className="text-3xl font-heading text-center text-white">{card.title}</h1>
                     </div>
                     <div className="desc text-center">
-                        <p>{card.desc}</p>
+                        <p className="text-white">{card.desc}</p>
                     </div>
                 </div> 
             

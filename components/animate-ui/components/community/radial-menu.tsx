@@ -617,7 +617,8 @@ export function RadialMenu({
 
   const pageNumber = Number(activePage);
   // Sur la page 1, on veut uniquement la roue + son anneau de chargement,
-  // sans le texte descriptif ni le panneau d'actions de part et d'autre.
+  // sans le texte descriptif, le panneau d'actions, le bandeau de vignettes
+  // ni l'image de fond dynamique.
   const isMinimal = pageNumber === 1;
 
   const [activeIndex, setActiveIndex] = React.useState(0);
@@ -667,7 +668,7 @@ export function RadialMenu({
   const nextIndex = itemCount > 0 ? (activeIndex + 1) % itemCount : 0;
   const prevIndex = itemCount > 0 ? (activeIndex - 1 + itemCount) % itemCount : 0;
 
-  const nextItem = menuItems[nextIndex];
+  
   const prevItem = menuItems[prevIndex];
   const activeItem = menuItems[activeIndex];
   const ActiveIcon = activeItem?.icon;
@@ -747,9 +748,9 @@ export function RadialMenu({
   }
 
   return (
-    <div className="relative isolate flex w-full max-w-7xl mx-auto rounded-[2.5rem] overflow-hidden">
+    <div className="relative isolate w-full max-w-7xl mx-auto rounded-[2.5rem] overflow-hidden">
       {/* ================= ARRIÈRE-PLAN DYNAMIQUE : chaque service illustre le fond à tour de rôle ================= */}
-      {/* Masqué en mode minimal (page 1) : il ne doit rester que la roue + le chargement, rien d'autre en fond */}
+      {/* Masqué en mode minimal (page 1) : pas d'image de fond, juste la roue sur le fond du parent */}
       {!isMinimal && (
         <div className="absolute inset-0 -z-10">
           <AnimatePresence mode="sync">
@@ -764,47 +765,55 @@ export function RadialMenu({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover object-[center_30%]"
             />
           </AnimatePresence>
-          <div className="absolute inset-0 bg-gradient-to-b from-white/92 via-white/85 to-white/95 dark:from-neutral-950/92 dark:via-neutral-950/85 dark:to-neutral-950/95" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/45 to-black/75" />
         </div>
       )}
 
-      <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4 py-8">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center px-4 py-8">
 
         {/* ================= COLONNE GAUCHE : DESCRIPTION (HOVER/AUTOPLAY) ================= */}
         {/* Masquée en mode minimal (page 1) : on ne garde que la roue + le chargement */}
         {!isMinimal && (
-          <div className="lg:col-span-3 space-y-4 flex flex-col justify-center min-h-[280px]">
+          <div className="lg:col-span-3 flex flex-col justify-center min-h-[280px] space-y-5 mx-4 md:mx-8 lg:mx-12">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.3 }}
-                className="space-y-3"
+                transition={{ duration: 0.35, ease: "easeOut" }}
+                className="space-y-4"
               >
-                <span className="text-xs font-bold uppercase tracking-wider text-yellow-700 dark:text-yellow-400 bg-yellow-100 dark:bg-yellow-950/50 px-3 py-1 rounded-full inline-block">
+                {/* Label */}
+                <span className="inline-flex items-center px-4 py-1 text-xs font-semibold uppercase tracking-wider rounded-full
+                  bg-yellow-100 text-black
+                  dark:bg-yellow-950/60 dark:text-yellow-300">
                   {activeItem?.label}
                 </span>
-                <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-neutral-50 tracking-tight">
-                  {activeItem?.title}
+
+                {/* Title */}
+                <h2 className="text-3xl md:text-3xl font-extrabold tracking-tight text-yellow-400 leading-tight">
+                  {activeItem?.title === "Espace Multimédia & Téléchargement" ? (
+                    <>
+                      Multimédia &<br />
+                      Téléchargement
+                    </>
+                  ) : (
+                    activeItem?.title
+                  )}
                 </h2>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed balance">
+
+                {/* Description */}
+                <p className="text-sm md:text-base leading-relaxed text-neutral-200/80 max-w-md">
                   {activeItem?.description}
                 </p>
               </motion.div>
             </AnimatePresence>
           </div>
-      )}
-      </div>
-
-      {/* ================= COLONNE CENTRALE : LE MENU RADIAL ================= */}
-      <div className={`${activePage !== 1 ? "" : "grid-cols-1"} flex relative items-center justify-center select-none w-full`}>
-
-
+        )}
 
         {/* ================= COLONNE CENTRALE : LE MENU RADIAL ================= */}
         <div
@@ -814,15 +823,7 @@ export function RadialMenu({
           )}
         >
 
-          {pageNumber === 2 && (
-            <div className="absolute left-[-100px] hidden xl:flex flex-col items-center justify-center w-24 text-center">
-              <span className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">Suivant</span>
-              <div className="flex items-center gap-1 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-                <ChevronLeft className="size-3 animate-pulse" />
-                <span className="truncate max-w-[80px]">{nextItem?.label}</span>
-              </div>
-            </div>
-          )}
+          
 
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
@@ -943,15 +944,6 @@ export function RadialMenu({
             </svg>
           </motion.div>
 
-          {pageNumber === 2 && (
-            <div className="absolute right-[-100px] hidden xl:flex flex-col items-center justify-center w-24 text-center">
-              <span className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">Précédent</span>
-              <div className="flex items-center gap-1 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-                <span className="truncate max-w-[80px]">{prevItem?.label}</span>
-                <ChevronRight className="size-3 animate-pulse" />
-              </div>
-            </div>
-          )}
         </div>
 
         {/* ================= COLONNE DROITE : LES ACTION BUTTONS (CLIC) ================= */}
@@ -1000,9 +992,11 @@ export function RadialMenu({
                   </button>
                 </motion.div>
               ) : (
-                <div className="flex h-full flex-col items-center justify-center p-6 border-2 border-dashed border-neutral-200 dark:border-neutral-800 rounded-2xl text-center bg-white/60 dark:bg-neutral-900/60 backdrop-blur-md">
-                  <p className="text-xs text-neutral-400 dark:text-neutral-500 font-medium max-w-[180px]">
-                    Cliquez sur un service du menu pour débloquer les actions de réservation.
+                <div>
+                  <p>
+                    <span className="text-xs md:text-sm font-medium uppercase tracking-[0.25em] text-neutral-400 dark:text-neutral-500">
+                      Sélectionnez un service
+                    </span>
                   </p>
                 </div>
               )}
@@ -1014,7 +1008,7 @@ export function RadialMenu({
       {/* ================= BANDEAU DE VIGNETTES : représente l'ensemble des services du menu ================= */}
       {/* Masqué en mode minimal (page 1) : on ne garde que la roue + le chargement */}
       {!isMinimal && (
-        <div className="px-4 pb-8 -mt-2">
+        <div>
           <ThumbnailRail items={menuItems} activeIndex={activeIndex} onHover={handleHover} onSelect={handlePick} />
         </div>
       )}

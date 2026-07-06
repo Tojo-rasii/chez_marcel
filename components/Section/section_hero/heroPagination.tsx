@@ -7,9 +7,10 @@ import {
   PaginationLink,
 } from "@/components/ui/pagination";
 
-export default function HeroPagination({ activePage, setActivePage }:any) {
+export default function HeroPagination({ activePage, setActivePage }: any) {
   return (
-    <div className="bg-gray-500 m-5 p-5">
+    // Suppression du fond gris et des marges fixes
+    <div className="pb-10 pl-10"> 
       <Pagination>
         <PaginationContent className="gap-8">
           {[1, 2, 3, 4, 5, 6].map((page) => (
@@ -19,20 +20,18 @@ export default function HeroPagination({ activePage, setActivePage }:any) {
                 onClick={(e) => {
                   e.preventDefault();
                   setActivePage(page);
-
-
                 }}
                 className={`
-                  p-0 bg-none font-heading
-                  text-[#E2C300]
-                  ${activePage === page ? "opacity-100" : "opacity-50"}
+                  p-0 bg-none font-heading text-lg
+                  text-[#E2C300] transition-opacity duration-300
+                  ${activePage === page ? "opacity-100" : "opacity-30 hover:opacity-60"}
                 `}
               >
                 {page.toString().padStart(2, "0")}
               </PaginationLink>
 
               {activePage === page && (
-                <div className="h-[2px] w-20 bg-[#E2C300]" />
+                <div className="h-[2px] w-16 bg-[#E2C300] transition-all duration-300" />
               )}
             </PaginationItem>
           ))}

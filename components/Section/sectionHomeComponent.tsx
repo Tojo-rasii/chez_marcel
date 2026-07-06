@@ -94,11 +94,14 @@ export default function SectionHomeComponent() {
         <SectionHero activePage={activePage} />
       </div>
 
-      <div className="absolute bottom-0 left-0">
-        <HeroPagination activePage={activePage} setActivePage={goToPage} />
+      <div className="fixed bottom-1 left-8 z-20">
+        <HeroPagination
+          activePage={activePage}
+          setActivePage={goToPage}
+        />
       </div>
 
-      <div className="absolute bottom-0 right-0">
+      <div className="fixed bottom-1 right-8 z-20">
         <MouseScroll />
       </div>
     </div>

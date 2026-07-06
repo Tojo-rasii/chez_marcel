@@ -5,11 +5,20 @@ import { Mouse } from "lucide-react";
 
 export default function ActionButton() {
   return (
-    <div>
-        <div className="flex justify-center gap-4 items-center mt-5">
-            <Button variant="outline" className="w-full outline-2 outline-black bg-transparent font-heading text-xl w-max h-15 text-black px-4 rounded-full">Demander un devis</Button>
-            <Button variant="default" className="w-full outline-2 outline-black bg-black text-white w-max h-15 text-xl font-heading px-4 rounded-full"> Nous contacter </Button>
-        </div>
+    <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-6">
+      <Button
+        variant="outline"
+        className="h-12 px-6 rounded-full border-2 border-white bg-transparent text-white font-heading text-base sm:text-lg transition hover:bg-white hover:text-black"
+      >
+        Demander un devis
+      </Button>
+
+      <Button
+        variant="default"
+        className="h-12 px-6 rounded-full bg-white text-black font-heading text-base sm:text-lg transition hover:opacity-90 "
+      >
+        Nous contacter
+      </Button>
     </div>
   );
 }
