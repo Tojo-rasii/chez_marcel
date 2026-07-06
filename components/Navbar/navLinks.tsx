@@ -22,7 +22,7 @@ export default function NavLinks() {
 
 
   return (
-    <div className="flex items-center justify-center gap-5">
+    <div className="flex items-center z-99 justify-center gap-5">
 
       <ul className="flex items-center max-md:hidden gap-7 font-heading text-lg">
         {nav.map((item, index) => (
@@ -37,8 +37,8 @@ export default function NavLinks() {
       {/* <Separator position="vertical"/> */}
 
       <div className="flex items-center gap-5 ms-10">
-        <Globe className="size-5" />
-        <TextAlignStart className="size-5" />
+        <Globe className="size-5 cursor-pointer" />
+        <TextAlignStart className="size-5 cursor-pointer" />
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import { SendIcon } from "lucide-react";
 import Image from "next/image";
 
 export default function FooterNewsLetter() {
@@ -24,10 +25,11 @@ export default function FooterNewsLetter() {
         {/* Bouton d'action circulaire noir superposé */}
         <button 
           type="submit" 
-          className="absolute -bottom-7 right-12 w-16 h-16 bg-black rounded-full flex items-center justify-center transition-transform hover:scale-105 active:scale-95 border border-black focus:outline-none"
+          className="absolute cursor-pointer -bottom-7 right-12 w-16 h-16 bg-black rounded-full flex items-center justify-center transition-transform hover:scale-105 active:scale-95 border border-black focus:outline-none"
           aria-label="S'abonner à la newsletter"
         >
           {/* L'image montre un cercle noir uni, vous pouvez y ajouter une flèche discrète si besoin */}
+          <SendIcon className="text-white"/>
         </button>
       </div>
     </div>

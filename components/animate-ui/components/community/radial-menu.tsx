@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence, type Transition } from "motion/react";
 import { cn } from "@/lib/utils";
+import { Separator } from "@/components/lightswind/separator";
 
 /* -------------------------------------------------------------------------- */
 /*  Types                                                                     */
@@ -558,7 +559,8 @@ function ThumbnailRail({
   onSelect: (item: MenuItem) => void;
 }) {
   return (
-    <div className="flex items-center justify-center gap-2 flex-wrap mt-6">
+    <div className="flex items-center justify-end h-full gap-4 mt-6">
+      <Separator className="w-7" />
       {items.map((item, index) => {
         const active = index === activeIndex;
         return (
@@ -569,8 +571,8 @@ function ThumbnailRail({
             aria-current={active}
             aria-label={item.label}
             className={cn(
-              "relative shrink-0 rounded-full overflow-hidden transition-all duration-300",
-              active ? "size-11 ring-2 ring-yellow-500 ring-offset-2 ring-offset-white dark:ring-offset-neutral-950" : "size-9 opacity-70 hover:opacity-100"
+              "relative shrink-0 w-50 h-50  rounded-full overflow-hidden transition-all duration-300",
+              active ? " ring-2 ring-yellow-500 ring-offset-2 ring-offset-white dark:ring-offset-neutral-950" : "hidden size-9 opacity-70 hover:opacity-100"
             )}
           >
             <img
@@ -584,6 +586,8 @@ function ThumbnailRail({
           </button>
         );
       })}
+      <Separator className="w-7" />
+
     </div>
   );
 }
@@ -594,7 +598,7 @@ function ThumbnailRail({
 
 export function RadialMenu({
   menuItems,
-  size = 400,
+  size = 350,
   iconSize = 22,
   bandWidth = 60,
   innerGap = 8,
@@ -747,7 +751,7 @@ export function RadialMenu({
   }
 
   return (
-    <div className={`relative isolate ${!isMinimal && "grid grid-cols-4"} w-full mx-auto rounded-[2.5rem] overflow-hidden`}>
+    <div className={`relative isolate ${!isMinimal && "grid grid-cols-3"} w-full mx-auto overflow-hidden`}>
       {/* ================= ARRIÈRE-PLAN DYNAMIQUE : chaque service illustre le fond à tour de rôle ================= */}
       {/* Masqué en mode minimal (page 1) : il ne doit rester que la roue + le chargement, rien d'autre en fond */}
       {!isMinimal && (
@@ -784,12 +788,12 @@ export function RadialMenu({
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 20 }}
                   transition={{ duration: 0.3 }}
-                  className="space-y-3"
+                  className="space-y-4"
                 >
-                  <span className="text-xs font-bold uppercase tracking-wider text-yellow-700 dark:text-yellow-400 bg-yellow-100 dark:bg-yellow-950/50 px-3 py-1 rounded-full inline-block">
+                  <span className="text-md font-bold mb-2 font-heading uppercase text-yellow-700 dark:text-yellow-400 ">
                     {activeItem?.label}
                   </span>
-                  <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-neutral-50 tracking-tight">
+                  <h2 className="text-4xl font-extrabold font-heading text-neutral-900 dark:text-neutral-50 tracking-tight">
                     {activeItem?.title}
                   </h2>
                   <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed balance">
@@ -803,7 +807,7 @@ export function RadialMenu({
       )}
 
       {/* ================= COLONNE CENTRALE : LE MENU RADIAL ================= */}
-      <div className={`${activePage !== 1 ? "" : ""} grid relative items-center justify-center select-none w-full`}>
+      <div className={`${activePage !== 1 ? "" : ""} grid relative items-center justify-center bg-red-500 select-none w-full`}>
 
 
 
@@ -811,7 +815,7 @@ export function RadialMenu({
         <div
           className={cn(
             "flex relative items-center justify-center select-none w-full",
-            isMinimal ? "lg:col-span-12" : "lg:col-span-6"
+            isMinimal ? "lg:col-span-6" : "lg:col-span-6"
           )}
         >
 
@@ -936,13 +940,16 @@ export function RadialMenu({
                   <div className="mb-2 flex items-center justify-center size-14 rounded-full bg-yellow-50 dark:bg-yellow-950/40 border border-yellow-200 dark:border-yellow-900 text-yellow-600 dark:text-yellow-400 transition-transform duration-300">
                     {ActiveIcon && <ActiveIcon size={28} strokeWidth={1.75} />}
                   </div>
-                  <span className="text-base font-bold text-neutral-800 dark:text-neutral-100 tracking-tight">
+                  <span className="text-base font-heading font-bold dark:text-neutral-100 tracking-tight">
                     {activeItem?.label}
                   </span>
                 </div>
               </foreignObject>
             </svg>
           </motion.div>
+
+
+        
 
           {pageNumber === 2 && (
             <div className="absolute right-[-100px] hidden xl:flex flex-col items-center justify-center w-24 text-center">
@@ -960,7 +967,7 @@ export function RadialMenu({
       {/* ================= COLONNE DROITE : LES ACTION BUTTONS (CLIC) ================= */}
       {/* Masquée en mode minimal (page 1) : pas d'actions déclenchables ici */}
       {!isMinimal && (
-        <div className="lg:col-span-3 min-h-[280px] flex flex-col justify-center">
+        <div className="min-h-full w-60 absolute right-9 z-9 flex flex-col justify-center">
           <AnimatePresence mode="wait">
             {selectedItem ? (
               <motion.div
@@ -969,18 +976,19 @@ export function RadialMenu({
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
-                className="space-y-3 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm"
+                className="space-y-3 bg-white dark:bg-neutral-900/90 p-5  border border-neutral-200 dark:border-neutral-800"
               >
-                <div className="mb-4">
-                  <p className="text-xs font-semibold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">
-                    Option choisie
-                  </p>
-                  <h4 className="text-base font-bold text-neutral-900 dark:text-white truncate">{selectedItem.label}</h4>
+                <div className="mb-4 flex items-center flex-col">
+              
+                    <h3 className="font-heading text-sm py-0 flex items-center gap-2">
+                              <Separator className="w-4 h-0.5 bg-black/30"/><span>Option choisie</span> 
+                          <Separator className="w-4 h-0.5 bg-black/30"/></h3>
+                  <h2 className="font-bold text-xl uppercase mt-1 font-heading text-neutral-900 dark:text-white">{selectedItem.label}</h2>
                 </div>
 
                 <button
                   onClick={() => setActiveModal("history")}
-                  className="w-full py-3 px-4 flex items-center justify-center gap-2 bg-yellow-500 hover:bg-yellow-400 active:scale-[0.98] text-neutral-900 font-semibold text-sm rounded-xl shadow-sm transition-all"
+                  className="w-full py-3 uppercase px-4 flex items-center justify-center gap-2 bg-yellow-500 hover:bg-yellow-400 active:scale-[0.98] text-neutral-900 font-semibold text-xs rounded-full transition-all  cursor-pointer"
                 >
                   <ShoppingBag size={16} />
                   Commander
@@ -988,7 +996,7 @@ export function RadialMenu({
 
                 <button
                   onClick={() => setActiveModal("calendar")}
-                  className="w-full py-3 px-4 flex items-center justify-center gap-2 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 active:scale-[0.98] text-neutral-900 dark:text-neutral-100 font-medium text-sm rounded-xl transition-all"
+                  className="w-full py-3 uppercase px-4 flex items-center justify-center gap-2 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 active:scale-[0.98] text-neutral-900 dark:text-neutral-100 font-medium text-xs rounded-full  cursor-pointer transition-all"
                 >
                   <CalendarCheck2 size={16} />
                   Réserver
@@ -996,14 +1004,14 @@ export function RadialMenu({
 
                 <button
                   onClick={() => setActiveModal("catalog")}
-                  className="w-full py-3 px-4 flex items-center justify-center gap-2 border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800 active:scale-[0.98] text-neutral-700 dark:text-neutral-300 font-medium text-sm rounded-xl transition-all"
+                  className="w-full py-3 uppercase px-4 flex items-center justify-center gap-2 border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800 active:scale-[0.98] text-neutral-700 dark:text-neutral-300 font-medium text-xs rounded-full cursor-pointer transition-all"
                 >
                   <LayoutGrid size={16} />
                   Catalogue
                 </button>
               </motion.div>
             ) : (
-              <div className="flex h-full flex-col items-center justify-center p-6 border-2 border-dashed border-neutral-200 dark:border-neutral-800 rounded-2xl text-center bg-white/60 dark:bg-neutral-900/60 backdrop-blur-md">
+              <div className="flex hidden h-full flex-col items-center justify-center p-6 border-2 border-dashed border-neutral-200 dark:border-neutral-800 rounded-2xl text-center bg-white/60 dark:bg-neutral-900/60 backdrop-blur-md">
                 <p className="text-xs text-neutral-400 dark:text-neutral-500 font-medium max-w-[180px]">
                   Cliquez sur un service du menu pour débloquer les actions de réservation.
                 </p>
@@ -1012,13 +1020,13 @@ export function RadialMenu({
           </AnimatePresence>
         </div>
       )}
-      {/* ================= BANDEAU DE VIGNETTES : représente l'ensemble des services du menu ================= */}
-      {/* Masqué en mode minimal (page 1) : on ne garde que la roue + le chargement */}
-      {!isMinimal && (
-        <div className="px-4 pb-8 -mt-2">
-          <ThumbnailRail items={menuItems} activeIndex={activeIndex} onHover={handleHover} onSelect={handlePick} />
-        </div>
-      )}
+
+        {!isMinimal && (
+            <div className="px-4  pb-8 -mt-2">
+              <ThumbnailRail items={menuItems} activeIndex={activeIndex} onHover={handleHover} onSelect={handlePick} />
+            </div>
+          )}
+
 
       {/* ================= POP-UPS ================= */}
       <AnimatePresence>

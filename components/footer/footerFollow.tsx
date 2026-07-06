@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function FooterFollow() {
   return (
-    <div className="p-6 font-heading max-w-xl mt-5">
+    <div className="p-6 px-0 font-heading max-w-xl mt-5">
       {/* Titre principal en majuscules avec espacement large */}
       <h3 className="text-xl tracking-widest uppercase mb-5 font-normal">
         SUIVEZ-NOUS

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Mouse } from "lucide-react";
+import { Info, Mouse } from "lucide-react";
 
 export default function ContactForm() {
   return (
@@ -7,11 +7,13 @@ export default function ContactForm() {
       {/* Conteneur principal avec effet d'ombre pleine noire décalée */}
       <div className="bg-white border border-black p-8 md:p-10 shadow-[20px_20px_0px_0px_#1a1a1a] flex flex-col gap-8">
         
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between flex-wrap gap-2 items-center">
           <h3 className="text-2xl font-serif tracking-wider text-black uppercase">
             LOREM IPSUM
           </h3>
           {/* Icône optionnelle si vous souhaitez l'intégrer discrètement */}
+         <div className="max-md:flex hidden">
+      <Info />     </div>
         </div>
 
         <form className="flex flex-col gap-10">

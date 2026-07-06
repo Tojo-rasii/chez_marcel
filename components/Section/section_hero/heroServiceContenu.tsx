@@ -4,9 +4,7 @@ import * as React from "react";
 import { RadialMenu, type MenuItem } from "@/components/animate-ui/components/community/radial-menu";
 import { Scissors, Film, CreditCard, Gamepad2 } from "lucide-react";
 
-// NOTE : les photos ci-dessous sont des images libres de droits (Unsplash) qui
-// servent de placeholders. Pour un rendu vraiment "premium", remplace-les par
-// de vraies photos de vos locaux / équipes dès que possible.
+
 const MENU_ITEMS: MenuItem[] = [
   {
     id: 1,
@@ -188,7 +186,7 @@ type HeroServiceContenuProps = {
 
 export default function HeroServiceContenu({ activePage, page }: HeroServiceContenuProps) {
   return (
-    <div className="w-full flex items-center justify-center p-4">
+    <div className="w-full max-md:absolute max-md:-bottom-70  max-md:p-0  max-md:scale-110 flex items-center justify-center p-4">
       <RadialMenu
         activePage={page}
         menuItems={MENU_ITEMS}
