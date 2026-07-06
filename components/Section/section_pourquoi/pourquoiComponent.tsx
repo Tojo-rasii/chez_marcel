@@ -10,7 +10,7 @@ export default function PourquoiComponent() {
             <div className="flex justify-center">
                 <PourquoiTitle />
             </div>
-            <div className="flex justify-center bg-green-500 max-md:justify-start">
+            <div className="flex justify-center max-md:justify-start">
                 <PourquoiCard />
             </div>
 

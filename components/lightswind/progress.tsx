@@ -22,61 +22,61 @@ interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
-  ({ 
-    className, 
-    value = 0, 
-    max = 100, 
+  ({
+    className,
+    value = 0,
+    max = 100,
     indicatorClassName,
     indeterminate = false,
     color = "default",
     size = "md",
     showValue = false,
     animationSpeed = "normal",
-    ...props 
+    ...props
   }, ref) => {
     const percentage = value ? (value / max) * 100 : 0;
     const [prevPercentage, setPrevPercentage] = React.useState(percentage);
     const [isAnimating, setIsAnimating] = React.useState(false);
-    
+
     React.useEffect(() => {
       // Only animate when the value actually changes
       if (percentage !== prevPercentage) {
         setIsAnimating(true);
         setPrevPercentage(percentage);
-        
+
         // Reset the animation state after the transition is complete
         const timeout = setTimeout(() => {
           setIsAnimating(false);
         }, 1000); // This should match the CSS transition duration
-        
+
         return () => clearTimeout(timeout);
       }
     }, [percentage, prevPercentage]);
-    
+
     // Color variants
     const colorVariants = {
       default: "bg-primary",
       primary: "bg-primary",
       secondary: "bg-secondary",
       success: "bg-green-500",
-      warning: "bg-yellow-500",
-      danger: "bg-red-500"
+      warning: "bg-transparent",
+      danger: "bg-transparent"
     };
-    
+
     // Size variants
     const sizeVariants = {
       sm: "h-2",
       md: "h-4",
       lg: "h-6"
     };
-    
+
     // Animation speed variants in milliseconds
     const animationSpeedMs = {
       slow: 1000,
       normal: 700,
       fast: 300
     };
-    
+
     return (
       <div
         ref={ref}
@@ -113,8 +113,8 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
             transition: indeterminate
               ? "background-color 200ms, border-color 200ms, box-shadow 200ms"
               : isAnimating
-              ? `transform ${animationSpeedMs[animationSpeed]}ms cubic-bezier(0.4, 0, 0.2, 1), background-color 200ms, border-color 200ms, box-shadow 200ms`
-              : "background-color 200ms, border-color 200ms, box-shadow 200ms"
+                ? `transform ${animationSpeedMs[animationSpeed]}ms cubic-bezier(0.4, 0, 0.2, 1), background-color 200ms, border-color 200ms, box-shadow 200ms`
+                : "background-color 200ms, border-color 200ms, box-shadow 200ms"
           }}
         />
         {showValue && (

@@ -13,7 +13,7 @@ const badgeVariants = cva(
         secondary:
           "border-transparent bg-secondary text-secondary-foreground",
         destructive:
-          "border-transparent bg-red-500 text-white",
+          "border-transparent bg-transparent text-white",
         outline:
           "text-foreground",
         success:
@@ -44,37 +44,37 @@ const badgeVariants = cva(
 
 export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {
+  VariantProps<typeof badgeVariants> {
   withDot?: boolean;
   dotColor?: string;
   interactive?: boolean;
   highlighted?: boolean;
 }
 
-function Badge({ 
-  className, 
-  variant, 
+function Badge({
+  className,
+  variant,
   size,
   shape,
   withDot,
   dotColor = "currentColor",
   interactive,
   highlighted,
-  ...props 
+  ...props
 }: BadgeProps) {
   return (
-    <div 
+    <div
       className={cn(
-        badgeVariants({ variant, size, shape }), 
+        badgeVariants({ variant, size, shape }),
         interactive && "cursor-pointer hover:opacity-80",
         highlighted && "ring-2 ring-offset-2 ring-ring",
         className
-      )} 
+      )}
       {...props}
     >
       {withDot && (
-        <span 
-          className="mr-1 h-1.5 w-1.5 rounded-full inline-block" 
+        <span
+          className="mr-1 h-1.5 w-1.5 rounded-full inline-block"
           style={{ backgroundColor: dotColor }}
         />
       )}

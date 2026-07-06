@@ -28,7 +28,7 @@ export default function PourquoiCard() {
                 {
                     cardData.map((card, index) => (
 
-                        <div key={index} className="flex bg-violet-500 max-md:items-start max-md:w-full max-md:flex-row  relative flex-col items-center max-md:items-start gap-4">
+                        <div key={index} className="flex max-md:items-start max-md:w-full max-md:flex-row  relative flex-col items-center max-md:items-start gap-4">
                             <div className="number min-w-18 min-h-18 max-md:min-w-12  max-md:min-h-12  flex items-center justify-center max-md:m-0 m-auto rounded-full bg-black ">
                                 <span className="font-normal font-heading max-md:text-xl text-3xl text-white" >
                                     {card.number}
@@ -36,7 +36,7 @@ export default function PourquoiCard() {
                             </div>
                             <div className="desc ax-md:w-full flex flex-col gap-2">
                                 <div className="title">
-                                    <h1 className="text-3xl max-md:text-xl font-heading max-md:text-start text-center">{card.title}</h1>
+                                    <h1 className="text-2xl text-black/80 font-semibold max-md:text-xl font-heading max-md:text-start text-center">{card.title}</h1>
                                 </div>
                                 <div className="desc text-center max-sm:line-clamp-2 max-md:text-start">
                                     <p>{card.desc}</p>

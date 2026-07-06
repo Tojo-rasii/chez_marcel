@@ -300,7 +300,7 @@ function CatalogModal({
                   "shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all active:scale-95",
                   added
                     ? "bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 cursor-default"
-                    : "bg-yellow-500 text-neutral-900 hover:bg-yellow-400"
+                    : "bg-transparent text-neutral-900 hover:bg-yellow-400"
                 )}
               >
                 {added ? (
@@ -430,7 +430,7 @@ function CalendarModal({
                 "aspect-square rounded-lg text-xs font-medium transition-colors",
                 isPast && "text-neutral-300 dark:text-neutral-700 cursor-not-allowed",
                 !isPast && !isSelected && "text-neutral-700 dark:text-neutral-300 hover:bg-yellow-50 dark:hover:bg-yellow-950/40",
-                isSelected && "bg-yellow-500 text-neutral-900"
+                isSelected && "bg-transparent text-neutral-900"
               )}
             >
               {day.getDate()}
@@ -452,7 +452,7 @@ function CalendarModal({
                 className={cn(
                   "py-2 rounded-lg text-xs font-medium border transition-colors",
                   selectedTime === time
-                    ? "bg-yellow-500 border-yellow-500 text-neutral-900"
+                    ? "bg-transparent border-yellow-500 text-neutral-900"
                     : "border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-300 hover:border-yellow-400"
                 )}
               >
@@ -466,7 +466,7 @@ function CalendarModal({
       <button
         onClick={handleConfirm}
         disabled={!selectedDay || !selectedTime}
-        className="w-full py-3 rounded-xl bg-yellow-500 text-neutral-900 text-sm font-semibold disabled:opacity-40 disabled:cursor-not-allowed hover:bg-yellow-400 active:scale-[0.98] transition-all"
+        className="w-full py-3 rounded-xl bg-transparent text-neutral-900 text-sm font-semibold disabled:opacity-40 disabled:cursor-not-allowed hover:bg-yellow-400 active:scale-[0.98] transition-all"
       >
         Confirmer la réservation
       </button>
@@ -807,7 +807,7 @@ export function RadialMenu({
       )}
 
       {/* ================= COLONNE CENTRALE : LE MENU RADIAL ================= */}
-      <div className={`${activePage !== 1 ? "" : ""} grid relative items-center justify-center bg-red-500 select-none w-full`}>
+      <div className={`${activePage !== 1 ? "" : ""} grid relative items-center justify-center bg-transparent select-none w-full`}>
 
 
 
@@ -820,7 +820,7 @@ export function RadialMenu({
         >
 
           {pageNumber === 2 && (
-            <div className="absolute left-[-100px] hidden xl:flex flex-col items-center justify-center w-24 text-center">
+            <div className="absolute left-[-100px] hidden flex-col items-center justify-center w-24 text-center">
               <span className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">Suivant</span>
               <div className="flex items-center gap-1 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
                 <ChevronLeft className="size-3 animate-pulse" />
@@ -885,7 +885,7 @@ export function RadialMenu({
                           className={cn(
                             "flex items-center justify-center rounded-full transition-all duration-300 border",
                             active
-                              ? "size-9 bg-yellow-500/15 border-yellow-500/70 shadow-[0_0_0_3px_rgba(234,179,8,0.15)] scale-110"
+                              ? "size-9 bg-transparent/15 border-yellow-500/70 shadow-[0_0_0_3px_rgba(234,179,8,0.15)] scale-110"
                               : "size-8 bg-white/5 border-white/10 group-hover:border-white/30"
                           )}
                         >
@@ -949,10 +949,10 @@ export function RadialMenu({
           </motion.div>
 
 
-        
+
 
           {pageNumber === 2 && (
-            <div className="absolute right-[-100px] hidden xl:flex flex-col items-center justify-center w-24 text-center">
+            <div className="absolute right-[-100px] hidden flex-col items-center justify-center w-24 text-center">
               <span className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">Précédent</span>
               <div className="flex items-center gap-1 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
                 <span className="truncate max-w-[80px]">{prevItem?.label}</span>
@@ -979,16 +979,16 @@ export function RadialMenu({
                 className="space-y-3 bg-white dark:bg-neutral-900/90 p-5  border border-neutral-200 dark:border-neutral-800"
               >
                 <div className="mb-4 flex items-center flex-col">
-              
-                    <h3 className="font-heading text-sm py-0 flex items-center gap-2">
-                              <Separator className="w-4 h-0.5 bg-black/30"/><span>Option choisie</span> 
-                          <Separator className="w-4 h-0.5 bg-black/30"/></h3>
+
+                  <h3 className="font-heading text-sm py-0 flex items-center gap-2">
+                    <Separator className="w-4 h-0.5 bg-black/30" /><span>Option choisie</span>
+                    <Separator className="w-4 h-0.5 bg-black/30" /></h3>
                   <h2 className="font-bold text-xl uppercase mt-1 font-heading text-neutral-900 dark:text-white">{selectedItem.label}</h2>
                 </div>
 
                 <button
                   onClick={() => setActiveModal("history")}
-                  className="w-full py-3 uppercase px-4 flex items-center justify-center gap-2 bg-yellow-500 hover:bg-yellow-400 active:scale-[0.98] text-neutral-900 font-semibold text-xs rounded-full transition-all  cursor-pointer"
+                  className="w-full py-3 uppercase px-4 flex items-center justify-center gap-2 bg-transparent hover:bg-yellow-400 active:scale-[0.98] text-neutral-900 font-semibold text-xs rounded-full transition-all  cursor-pointer"
                 >
                   <ShoppingBag size={16} />
                   Commander
@@ -1021,11 +1021,11 @@ export function RadialMenu({
         </div>
       )}
 
-        {!isMinimal && (
-            <div className="px-4  pb-8 -mt-2">
-              <ThumbnailRail items={menuItems} activeIndex={activeIndex} onHover={handleHover} onSelect={handlePick} />
-            </div>
-          )}
+      {!isMinimal && (
+        <div className="px-4  pb-8 -mt-2">
+          <ThumbnailRail items={menuItems} activeIndex={activeIndex} onHover={handleHover} onSelect={handlePick} />
+        </div>
+      )}
 
 
       {/* ================= POP-UPS ================= */}

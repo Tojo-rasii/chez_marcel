@@ -95,7 +95,7 @@ function DockItem({
     >
       <div className="flex items-center justify-center">{icon}</div>
       {badgeCount !== undefined && badgeCount > 0 && (
-        <span className="absolute -top-2 -right-2 flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
+        <span className="absolute -top-2 -right-2 flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-transparent rounded-full">
           {badgeCount > 99 ? "99+" : badgeCount}
         </span>
       )}

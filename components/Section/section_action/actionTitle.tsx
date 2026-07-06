@@ -7,7 +7,7 @@ import { Mouse } from "lucide-react";
 export default function ActionTitle() {
   return (
     <div>
-        <h3 className="font-heading text-2xl max-md:text-lg max-md:text-center flex items-center gap-3">
+        <h3 className="font-heading font-semibold text-xl max-md:text-lg max-md:text-center flex items-center gap-3">
             <Separator className="w-10 h-0.5 bg-black/50 max-md:hidden "/><span>Chez Marcel Click & Services</span> 
         </h3>
     </div>

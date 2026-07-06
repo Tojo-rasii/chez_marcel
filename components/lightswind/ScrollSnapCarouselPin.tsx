@@ -10,11 +10,11 @@
 
 // const SLIDE_DATA = [
 //   { id: 1, text: "Slide One", color: "bg-orange-500" },
-//   { id: 2, text: "Slide Two", color: "bg-red-500" },
+//   { id: 2, text: "Slide Two", color: "bg-transparent" },
 //   { id: 3, text: "Slide Three", color: "bg-violet-500" },
 //   { id: 4, text: "Slide Four", color: "bg-primarylw" },
 //   { id: 5, text: "Slide Five", color: "bg-teal-500" },
-//   { id: 6, text: "Slide Six", color: "bg-yellow-500" },
+//   { id: 6, text: "Slide Six", color: "bg-transparent" },
 //   { id: 7, text: "Slide Seven", color: "bg-fuchsia-500" },
 //   { id: 8, text: "Slide Eight", color: "bg-green-500" },
 // ];

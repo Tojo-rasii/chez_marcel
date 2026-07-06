@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function FooterServiceLink() {
     return (
         <div>
-            <h1 className="font-heading text-2xl max-md:text-xl max-md:mb-2 flex items-center gap-2">
+            <h1 className="font-heading uppercase text-xl font-bold max-md:text-xl max-md:mb-2 flex items-center gap-2">
                 Services
             </h1>
 

@@ -7,13 +7,13 @@ import {
   PaginationLink,
 } from "@/components/ui/pagination";
 
-export default function HeroPagination({ activePage, setActivePage }:any) {
+export default function HeroPagination({ activePage, setActivePage }: any) {
   return (
-    <div className="bg-red-500 p-2 px-5">
+    <div className="bg-transparent p-2 px-5">
       <Pagination>
-        <PaginationContent className="gap-8">
+        <PaginationContent className="gap-5">
           {[1, 2, 3, 4, 5, 6].map((page) => (
-            <PaginationItem key={page} className="flex items-center gap-6">
+            <PaginationItem key={page} className="flex items-center gap-2">
               <PaginationLink
                 href="#"
                 onClick={(e) => {
@@ -23,16 +23,16 @@ export default function HeroPagination({ activePage, setActivePage }:any) {
 
                 }}
                 className={`
-                  p-0 bg-none font-heading
-                  text-[#E2C300]
-                  ${activePage === page ? "opacity-100" : "opacity-50"}
+                  p-0 bg-none font-heading ring-0
+                  
+                  ${activePage === page ? "opacity-100 font-bold" : "opacity-50"}
                 `}
               >
                 {page.toString().padStart(2, "0")}
               </PaginationLink>
 
               {activePage === page && (
-                <div className="h-[2px] w-20 bg-[#E2C300]" />
+                <div className="h-[2px] m-auto w-10 bg-black" />
               )}
             </PaginationItem>
           ))}

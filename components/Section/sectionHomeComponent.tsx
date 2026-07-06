@@ -7,6 +7,7 @@ import { Observer } from "gsap/Observer";
 import SectionHero from "./section_hero/sectionHero";
 import HeroPagination from "./section_hero/heroPagination";
 import MouseScroll from "./section_hero/mouseScroll";
+import Globe from "../lightswind/globe";
 
 gsap.registerPlugin(Observer);
 
