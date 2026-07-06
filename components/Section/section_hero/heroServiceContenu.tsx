@@ -62,7 +62,7 @@ const MENU_ITEMS: MenuItem[] = [
     description:
       "Accès aux dernières nouveautés de films, séries et musiques. Téléchargements haute qualité et ultra-rapides sur tous vos supports numériques.",
     image:
-      "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=1600&auto=format&fit=crop&crop=entropy",
+      "https://images.unsplash.com/photo-1560253023-3ec5d502959f?q=80&w=1600&auto=format&fit=crop&crop=entropy",
     catalogLabel: "Catégories de films & séries",
     catalog: [
       {
@@ -111,7 +111,7 @@ const MENU_ITEMS: MenuItem[] = [
     description:
       "Dépôts et retraits via Mvola, Orange Money et Airtel Money en toute sécurité. Profitez de transactions rapides et fiables pour toutes vos opérations financières du quotidien.",
     image:
-      "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=400&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1600&auto=format&fit=crop&crop=entropy",
     catalogLabel: "Services disponibles",
     catalog: [
       {
@@ -148,7 +148,7 @@ const MENU_ITEMS: MenuItem[] = [
     description:
       "Espace détente équipé de consoles PlayStation. Amusez-vous avec une sélection variée de jeux vidéo dans une ambiance conviviale.",
     image:
-      "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=1600&auto=format&fit=crop&crop=entropy",
+      "https://images.unsplash.com/photo-1593305841991-05c297ba4575?q=80&w=1600&auto=format&fit=crop&crop=entropy",
     catalogLabel: "Jeux disponibles",
     catalog: [
       {
