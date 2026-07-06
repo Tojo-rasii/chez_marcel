@@ -10,7 +10,7 @@ import {
 export default function HeroPagination({ activePage, setActivePage }: any) {
   return (
     // Suppression du fond gris et des marges fixes
-    <div className="pb-10 pl-10"> 
+    
       <Pagination>
         <PaginationContent className="gap-8">
           {[1, 2, 3, 4, 5, 6].map((page) => (
@@ -37,6 +37,5 @@ export default function HeroPagination({ activePage, setActivePage }: any) {
           ))}
         </PaginationContent>
       </Pagination>
-    </div>
   );
 }
