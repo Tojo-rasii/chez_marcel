@@ -54,7 +54,7 @@ export default function SectionHero({ activePage }: any) {
 
         {activePage !== 3 && activePage !== 4 && activePage !== 5 && activePage !== 6 && (
           <div className="h-full m-auto bg-red-200 w-full flex items-center justify-center">
-            <HeroServiceContenu page={activePage} />
+            <HeroServiceContenu page={activePage} activePage={activePage} />
           </div>
         )}
 
