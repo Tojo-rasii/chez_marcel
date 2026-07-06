@@ -5,7 +5,7 @@ export default function ContactInfo() {
     <div className=" p-6 rounded-3xl shadow-2xl text-white max-w-xl">
       {/* En-tête */}
       <h2 className="text-xl font-bold tracking-tight mb-8 text-yellow-500 uppercase text-sm tracking-widest">
-        Infos - Contact
+        Informations de contact
       </h2>
 
       {/* Liste des informations */}
