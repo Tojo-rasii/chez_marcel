@@ -9,7 +9,7 @@ export default function ContactForm() {
         
         <div className="flex justify-between flex-wrap gap-2 items-center">
           <h3 className="text-2xl font-serif tracking-wider text-black uppercase">
-            LOREM IPSUM
+            Nous ecrire
           </h3>
           {/* Icône optionnelle si vous souhaitez l'intégrer discrètement */}
          <div className="max-md:flex hidden">
