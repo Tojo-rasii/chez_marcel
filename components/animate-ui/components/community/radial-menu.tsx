@@ -16,6 +16,14 @@ import {
 import { motion, AnimatePresence, type Transition } from "motion/react";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/lightswind/separator";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/lightswind/carousel";
+import { FlipCard } from "./flip-card";
 
 /* -------------------------------------------------------------------------- */
 /*  Types                                                                     */
@@ -195,7 +203,7 @@ function ModalShell({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+      className="fixed inset-0 z-999 flex items-center justify-center p-4 bg-black/30 backdrop-blur-xs"
       onClick={onClose}
       role="presentation"
     >
@@ -208,17 +216,17 @@ function ModalShell({
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="w-full max-w-md max-h-[85vh] overflow-hidden flex flex-col rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-2xl"
+        className="w-full max-w-2xl z-999 max-h-[90vh] overflow-hidden flex flex-col bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xl"
       >
         <div className="flex items-start justify-between gap-4 px-5 pt-5 pb-4 border-b border-neutral-100 dark:border-neutral-800">
           <div>
-            <h3 className="text-base font-bold text-neutral-900 dark:text-white">{title}</h3>
-            {subtitle && <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">{subtitle}</p>}
+            <h3 className="text-xl font-heading font-bold text-neutral-900 dark:text-white">{title}</h3>
+            {subtitle && <p className="text-xs mt-2 uppercase flex items-center gap-2 font-semibold text-neutral-700 dark:text-neutral-400 mt-0.5">  <Separator className="w-4 h-0.5 max-md:w-5 bg-black/50" />{subtitle}</p>}
           </div>
           <button
             onClick={onClose}
             aria-label="Fermer"
-            className="shrink-0 p-1.5 rounded-full text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 transition-colors"
+            className="shrink-0 border cursor-pointer p-1.5 rounded-full text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 transition-colors"
           >
             <X size={16} />
           </button>
@@ -256,64 +264,71 @@ function CatalogModal({
   const entries = item.catalog ?? [];
 
   return (
-    <ModalShell title={item.catalogLabel ?? "Catalogue"} subtitle={item.label} onClose={onClose}>
+    <ModalShell
+      title={item.catalogLabel ?? "Catalogue"}
+      subtitle={item.label}
+      onClose={onClose}
+    >
       {entries.length === 0 ? (
         <EmptyState message="Aucun élément de catalogue n'est disponible pour ce service pour le moment." />
       ) : (
-        entries.map((entry) => {
-          const added = addedIds.includes(entry.id);
-          return (
-            <div
-              key={entry.id}
-              className="flex items-center gap-3 p-3 rounded-xl border border-neutral-100 dark:border-neutral-800 hover:border-yellow-300 dark:hover:border-yellow-800 transition-colors"
-            >
-              <img
-                src={entry.image ?? item.image}
-                alt={entry.name}
-                loading="lazy"
-                decoding="async"
-                onError={(e) => {
-                  // Si le visuel spécifique à l'entrée est cassé, on retombe sur
-                  // l'image du service pour ne jamais afficher d'icône brisée.
-                  const img = e.currentTarget;
-                  if (img.src !== item.image) {
-                    img.src = item.image;
-                  }
-                }}
-                className="w-14 h-14 rounded-lg object-cover shrink-0 bg-neutral-100 dark:bg-neutral-800"
-              />
-              <div className="min-w-0 flex-1">
-                <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">{entry.name}</p>
-                {entry.description && (
-                  <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 leading-relaxed">
-                    {entry.description}
-                  </p>
-                )}
-                {entry.price && (
-                  <p className="text-xs font-semibold text-yellow-600 dark:text-yellow-400 mt-1">{entry.price}</p>
-                )}
-              </div>
-              <button
-                onClick={() => onPick(entry)}
-                disabled={added}
-                className={cn(
-                  "shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all active:scale-95",
-                  added
-                    ? "bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 cursor-default"
-                    : "bg-transparent text-neutral-900 hover:bg-yellow-400"
-                )}
-              >
-                {added ? (
-                  <>
-                    <Check size={13} /> Ajouté
-                  </>
-                ) : (
-                  "Ajouter"
-                )}
-              </button>
-            </div>
-          );
-        })
+        <Carousel
+          opts={{ align: "start", loop: false }}
+          className="w-full"
+        >
+          <CarouselContent>
+            {entries.map((entry) => {
+              const added = addedIds.includes(entry.id);
+
+              return (
+                <CarouselItem
+                  key={entry.id}
+                  className="basis-full md:basis-1/2 xl:basis-1/3"
+                >
+                  {/* FlipCard wrapper SANS casser le layout */}
+                  <div className="flex relative font-heading justify-center">
+                    <FlipCard
+                      data={{
+                        name: entry.name,
+                        username: entry.id,
+                        image: entry.image ?? item.image,
+                        bio: entry.description ?? "",
+                        stats: {
+                          following: 0,
+                          followers: 0,
+                        },
+                      }}
+                    />
+                    <button
+                      onClick={() => onPick(entry)}
+                      disabled={added}
+                      className={cn(
+                        "w-20 h-8 font-semibold rounded-full cursor-pointer absolute bottom-5 text-xs font-medium transition-all",
+                        added
+                          ? "bg-emerald-50 text-emerald-600"
+                          : "bg-yellow-400 hover:bg-yellow-500 text-black"
+                      )}
+                    >
+                      {added ? "Ajouté" : "Ajouter"}
+                    </button>
+                  </div>
+
+                  
+                </CarouselItem>
+              );
+            })}
+          </CarouselContent>
+
+          <div className="absolute top-1/2 -translate-y-1/2 left-10">
+
+            <CarouselPrevious />
+          </div>
+          <div className="absolute top-1/2 -translate-y-1/2 right-10">
+
+            <CarouselNext />
+
+          </div>
+        </Carousel>
       )}
     </ModalShell>
   );
@@ -387,89 +402,112 @@ function CalendarModal({
 
   return (
     <ModalShell title="Réserver un créneau" subtitle={item.label} onClose={onClose}>
-      <div className="flex items-center justify-between mb-3">
-        <button
-          onClick={goToPrevMonth}
-          disabled={!canGoPrev}
-          aria-label="Mois précédent"
-          className="p-1.5 rounded-lg text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-30 disabled:hover:bg-transparent"
-        >
-          <ChevronLeft size={16} />
-        </button>
-        <span className="text-sm font-semibold text-neutral-800 dark:text-neutral-100">
-          {MONTH_LABELS[month]} {year}
-        </span>
-        <button
-          onClick={goToNextMonth}
-          aria-label="Mois suivant"
-          className="p-1.5 rounded-lg text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-        >
-          <ChevronRight size={16} />
-        </button>
-      </div>
 
-      <div className="grid grid-cols-7 gap-1 text-center mb-1">
-        {WEEKDAY_LABELS.map((w) => (
-          <span key={w} className="text-[10px] font-semibold uppercase text-neutral-400">
-            {w}
-          </span>
-        ))}
-      </div>
 
-      <div className="grid grid-cols-7 gap-1 mb-4">
-        {cells.map((day, i) => {
-          if (!day) return <div key={`empty-${i}`} />;
-          const isPast = day < today;
-          const isSelected = !!selectedDay && isSameDay(day, selectedDay);
-          return (
+
+      <div className="grid grid-cols-[1fr_0.8fr] gap-8">
+        <div className="flex flex-col border p-3 pb-0.5 border-gray-100">
+          <div className="flex items-center  justify-between mb-3">
             <button
-              key={day.toISOString()}
-              disabled={isPast}
-              onClick={() => setSelectedDay(day)}
-              className={cn(
-                "aspect-square rounded-lg text-xs font-medium transition-colors",
-                isPast && "text-neutral-300 dark:text-neutral-700 cursor-not-allowed",
-                !isPast && !isSelected && "text-neutral-700 dark:text-neutral-300 hover:bg-yellow-50 dark:hover:bg-yellow-950/40",
-                isSelected && "bg-transparent text-neutral-900"
-              )}
+              onClick={goToPrevMonth}
+              disabled={!canGoPrev}
+              aria-label="Mois précédent"
+              className="p-1.5 rounded-lg text-neutral-400 hover:scale-110 dark:hover:bg-neutral-800 disabled:opacity-30 disabled:hover:bg-transparent"
             >
-              {day.getDate()}
+              <ChevronLeft size={20} />
             </button>
-          );
-        })}
-      </div>
+            <span className="text-sm font-heading  font-semibold text-neutral-800 dark:text-neutral-100">
+              {MONTH_LABELS[month]} {year}
+            </span>
+            <button
+              onClick={goToNextMonth}
+              aria-label="Mois suivant"
+              className="p-1.5 rounded-lg text-neutral-400 hover:scale-110 dark:hover:bg-neutral-800"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
 
-      {selectedDay && (
-        <div className="mb-4">
-          <p className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 mb-2 flex items-center gap-1.5">
-            <Clock size={12} /> Choisissez un horaire
-          </p>
-          <div className="grid grid-cols-3 gap-2">
-            {TIME_SLOTS.map((time) => (
-              <button
-                key={time}
-                onClick={() => setSelectedTime(time)}
-                className={cn(
-                  "py-2 rounded-lg text-xs font-medium border transition-colors",
-                  selectedTime === time
-                    ? "bg-transparent border-black text-neutral-900"
-                    : "border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-300 hover:border-yellow-400"
-                )}
-              >
-                {time}
-              </button>
+          <div className="grid grid-cols-7 gap-1 text-center mb-1">
+            {WEEKDAY_LABELS.map((w) => (
+              <span key={w} className="text-[10px] font-semibold uppercase text-neutral-500">
+                {w}
+              </span>
             ))}
           </div>
-        </div>
-      )}
 
-      <button
-        onClick={handleConfirm}
-        disabled={!selectedDay || !selectedTime}
-        className="w-full py-3 rounded-xl bg-transparent text-neutral-900 text-sm font-semibold disabled:opacity-40 disabled:cursor-not-allowed hover:bg-yellow-400 active:scale-[0.98] transition-all"
-      >
-        Confirmer la réservation
-      </button>
+          <div className="grid grid-cols-7 gap-1 mb-4">
+            {cells.map((day, i) => {
+              if (!day) return <div key={`empty-${i}`} />;
+              const isPast = day < today;
+              const isSelected = !!selectedDay && isSameDay(day, selectedDay);
+              return (
+                <button
+                  key={day.toISOString()}
+                  disabled={isPast}
+                  onClick={() => setSelectedDay(day)}
+                  className={cn(
+                    "aspect-square border border-black/5 rounded-full hover:border-1 hover:border-black/20  font-heading text-xs font-semibold transition-colors",
+                    isPast && "text-neutral-300 border-black/5 dark:text-neutral-700 cursor-not-allowed",
+                    !isPast && !isSelected && "text-neutral-700 dark:text-neutral-300 hover:bg-yellow-50 dark:hover:bg-yellow-950/40",
+                    isSelected && "bg-black text-white"
+                  )}
+                >
+                  {day.getDate()}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+        <div className="flex flex-col">
+          {selectedDay && (
+            <div className="mb-4">
+              <p className="text-sm mb-3 font-heading font-semibold text-neutral-500 dark:text-neutral-400 mb-2 flex items-center gap-1.5">
+                <Clock size={14} /> À quelle heure ?.
+              </p>
+              <div className="grid grid-cols-3 gap-2">
+                {TIME_SLOTS.map((time) => (
+                  <button
+                    key={time}
+                    onClick={() => setSelectedTime(time)}
+                    className={cn(
+                      "py-2 rounded-lg text-xs font-medium border transition-colors",
+                      selectedTime === time
+                        ? "bg-transparent border-black text-neutral-900"
+                        : "border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-300 hover:border-yellow-400"
+                    )}
+                  >
+                    {time}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {!selectedDay && (
+            <div className="flex flex-col mb-3 items-center gap-2 text-center">
+              <h3 className="font-heading font-semibold text-md max-md:text-lg max-md:text-center flex items-center gap-3">
+                <span>Quand êtes-vous disponible ?</span>
+              </h3>
+              <p className="text-sm">Réservez votre place en choisissant une date.</p>
+
+            </div>
+
+          )}
+
+          <button
+            onClick={handleConfirm}
+            disabled={!selectedDay || !selectedTime}
+            className="w-full py-2.5 px-6 mx-auto rounded-full bg-black text-white uppercase text-[0.8em] font-semibold disabled:active:scale-[1] disabled:hover:bg-black disabled:opacity-30 disabled:cursor-not-allowed hover:bg-yellow-400 active:scale-[0.98] transition-all"
+          >
+            Confirmer la réservation
+          </button>
+        </div>
+      </div>
+
+
+
+
     </ModalShell>
   );
 }
@@ -751,7 +789,7 @@ export function RadialMenu({
   }
 
   return (
-    <div className={`relative isolate ${!isMinimal && "grid grid-cols-3"} w-full mx-auto overflow-hidden`}>
+    <div className={`relative isolate ${!isMinimal && "grid grid-cols-3 max-md:grid-cols-1"} w-full mx-auto overflow-hidden`}>
       {/* ================= ARRIÈRE-PLAN DYNAMIQUE : chaque service illustre le fond à tour de rôle ================= */}
       {/* Masqué en mode minimal (page 1) : il ne doit rester que la roue + le chargement, rien d'autre en fond */}
       {/* {!isMinimal && (
@@ -775,7 +813,7 @@ export function RadialMenu({
         </div>
       )} */}
       {!isMinimal && (
-        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4 py-8">
+        <div className="w-full max-md:hidden grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4 py-8">
 
           {/* ================= COLONNE GAUCHE : DESCRIPTION (HOVER/AUTOPLAY) ================= */}
           {/* Masquée en mode minimal (page 1) : on ne garde que la roue + le chargement */}
@@ -970,8 +1008,8 @@ export function RadialMenu({
       </div>
       {/* ================= COLONNE DROITE : LES ACTION BUTTONS (CLIC) ================= */}
       {/* Masquée en mode minimal (page 1) : pas d'actions déclenchables ici */}
-      {!isMinimal && (
-        <div className="min-h-full w-70 absolute right-9 z-9 flex flex-col justify-center">
+      {!isMinimal && selectedItem && (
+        <div className="min-h-full max-md:bg-white max-md:w-full  max-md:right-0  max-md:p-2 w-70 absolute right-9 z-999 flex flex-col justify-center">
           <AnimatePresence mode="wait">
             {selectedItem ? (
               <motion.div
@@ -1004,7 +1042,7 @@ export function RadialMenu({
                   className="w-full py-3 uppercase px-4 flex items-center justify-center gap-2 bg-black/90 hover:bg-black active:scale-[0.98] text-white font-semibold text-xs rounded-full transition-all  cursor-pointer"
                 >
                   <ShoppingBag size={16} />
-                  Commander
+                  Commande
                 </button>
 
                 <button
@@ -1035,34 +1073,36 @@ export function RadialMenu({
       )}
 
       {!isMinimal && (
-        <div className="px-4  pb-8 -mt-2">
+        <div className="px-4 max-md:hidden pb-8 -mt-2">
           <ThumbnailRail items={menuItems} activeIndex={activeIndex} onHover={handleHover} onSelect={handlePick} />
         </div>
       )}
 
+      {!isMinimal && (
+        <AnimatePresence>
+          {selectedItem && activeModal === "catalog" && (
+            <CatalogModal
+              item={selectedItem}
+              addedIds={addedCatalogIds}
+              onPick={handleAddOrder}
+              onClose={() => setActiveModal(null)}
+            />
+          )}
+          {selectedItem && activeModal === "calendar" && (
+            <CalendarModal item={selectedItem} onConfirm={handleAddReservation} onClose={() => setActiveModal(null)} />
+          )}
+          {selectedItem && activeModal === "history" && (
+            <HistoryModal
+              item={selectedItem}
+              orders={orders}
+              reservations={reservations}
+              onClose={() => setActiveModal(null)}
+            />
+          )}
+        </AnimatePresence>
+      )
+      }
 
-      {/* ================= POP-UPS ================= */}
-      <AnimatePresence>
-        {selectedItem && activeModal === "catalog" && (
-          <CatalogModal
-            item={selectedItem}
-            addedIds={addedCatalogIds}
-            onPick={handleAddOrder}
-            onClose={() => setActiveModal(null)}
-          />
-        )}
-        {selectedItem && activeModal === "calendar" && (
-          <CalendarModal item={selectedItem} onConfirm={handleAddReservation} onClose={() => setActiveModal(null)} />
-        )}
-        {selectedItem && activeModal === "history" && (
-          <HistoryModal
-            item={selectedItem}
-            orders={orders}
-            reservations={reservations}
-            onClose={() => setActiveModal(null)}
-          />
-        )}
-      </AnimatePresence>
-    </div>
+    </div >
   );
 }

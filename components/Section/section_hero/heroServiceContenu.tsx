@@ -186,7 +186,7 @@ type HeroServiceContenuProps = {
 
 export default function HeroServiceContenu({ activePage, page }: HeroServiceContenuProps) {
   return (
-    <div className="w-full max-md:absolute max-md:-bottom-70  max-md:p-0  max-md:scale-110 flex items-center justify-center">
+    <div className="w-full max-md:absolute max-md:p-0  max-md:scale-100 flex items-center justify-center">
       <RadialMenu
         activePage={page}
         menuItems={MENU_ITEMS}

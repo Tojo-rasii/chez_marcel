@@ -7,7 +7,7 @@ export default function ContactDescription() {
     <div>
            <h1 className="font-heading text-4xl font-semibold max-md:text-3xl flex items-center gap-2">
 
-           Parlons de votre besoin
+      Une question, une demande ou un besoin ?
         </h1>
     </div>
   );

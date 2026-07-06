@@ -5,7 +5,7 @@ export default function FooterDescription() {
         <div>
                <h1 className="font-heading text-4xl font-semibold max-md:text-3xl text-center flex items-center gap-2">
 
-            lorem lorem ipsum dolor sit 
+            Un clic, et vous êtes servi.
         </h1>
     </div>
   );

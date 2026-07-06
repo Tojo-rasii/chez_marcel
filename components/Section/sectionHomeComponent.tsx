@@ -7,7 +7,6 @@ import { Observer } from "gsap/Observer";
 import SectionHero from "./section_hero/sectionHero";
 import HeroPagination from "./section_hero/heroPagination";
 import MouseScroll from "./section_hero/mouseScroll";
-import Globe from "../lightswind/globe";
 
 gsap.registerPlugin(Observer);
 
@@ -23,13 +22,12 @@ export default function SectionHomeComponent() {
     activePageRef.current = activePage;
   }, [activePage]);
 
-  // Transition animée + changement de page (utilisée aussi par le scroll manuel via pagination)
   const goToPage = (target: number) => {
     if (isAnimating.current) return;
     if (target < 1 || target > MAX_PAGE || target === activePageRef.current) return;
 
     isAnimating.current = true;
-    const direction = target > activePageRef.current ? -1 : 1; // sens de la sortie
+    const direction = target > activePageRef.current ? -1 : 1;
 
     gsap.to(heroWrapperRef.current, {
       opacity: 0,
@@ -38,6 +36,7 @@ export default function SectionHomeComponent() {
       ease: "power2.in",
       onComplete: () => {
         setActivePage(target);
+
         gsap.fromTo(
           heroWrapperRef.current,
           { opacity: 0, y: -direction * 30 },
@@ -57,10 +56,9 @@ export default function SectionHomeComponent() {
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.1,
       smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 1.5,
+      touchMultiplier: 1.2,
     });
 
     function raf(time: number) {
@@ -69,28 +67,58 @@ export default function SectionHomeComponent() {
     }
     const rafId = requestAnimationFrame(raf);
 
-    // Observer capte molette / trackpad / touch, avec un "tolerance" qui évite
-    // les faux déclenchements (remplace ton système de setTimeout manuel)
+    const isMobile = window.innerWidth < 768;
+
+    // ✅ Desktop scroll (wheel only)
     const observer = Observer.create({
       target: window,
-      type: "wheel,touch",
+      type: "wheel",
       wheelSpeed: 1,
       tolerance: 10,
       preventDefault: true,
-      onDown: () => goToPage(activePageRef.current + 1), // scroll vers le bas -> page suivante
-      onUp: () => goToPage(activePageRef.current - 1),   // scroll vers le haut -> page précédente
+      onDown: () => goToPage(activePageRef.current + 1),
+      onUp: () => goToPage(activePageRef.current - 1),
     });
+
+    // ✅ Mobile swipe fallback (IMPORTANT)
+    let startY = 0;
+
+    const onTouchStart = (e: TouchEvent) => {
+      startY = e.touches[0].clientY;
+    };
+
+    const onTouchEnd = (e: TouchEvent) => {
+      const endY = e.changedTouches[0].clientY;
+      const diff = startY - endY;
+
+      if (Math.abs(diff) < 50) return;
+
+      if (diff > 0) {
+        goToPage(activePageRef.current + 1);
+      } else {
+        goToPage(activePageRef.current - 1);
+      }
+    };
+
+    if (isMobile) {
+      window.addEventListener("touchstart", onTouchStart, { passive: true });
+      window.addEventListener("touchend", onTouchEnd, { passive: true });
+    }
 
     return () => {
       observer.kill();
       lenis.destroy();
       cancelAnimationFrame(rafId);
+
+      if (isMobile) {
+        window.removeEventListener("touchstart", onTouchStart);
+        window.removeEventListener("touchend", onTouchEnd);
+      }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="h-full pt-4 w-full relative overflow-hidden">
+    <div className="h-full pt-4 w-full relative overflow-hidden touch-pan-y">
       <div ref={heroWrapperRef} className="h-full flex items-center">
         <SectionHero activePage={activePage} />
       </div>
