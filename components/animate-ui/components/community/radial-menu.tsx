@@ -852,7 +852,7 @@ export function RadialMenu({
         )}
 
         {/* ================= COLONNE CENTRALE : LE MENU RADIAL ================= */}
-        <div className={`${activePage !== 1 ? "items-end justify-end  self-end" : ""}  grid relative items-center justify-center bg-transparent select-none w-full`}>
+        <div className={`${activePage !== 1 ? "items-end justify-end  self-end" : ""}  grid relative max-md:justify-center items-center justify-center bg-transparent select-none w-full`}>
 
 
 
