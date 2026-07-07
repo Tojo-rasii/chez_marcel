@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function HeroDescription({ page }: any) {
   return (
     <div className="text-black/80 dark:text-white bg-transparent">
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5 max-md:gap-2 max-md:-mb-10">
         <h3 className="font-heading text-xl font-semibold max-md:text-lg flex items-center gap-3">
           <Separator className="w-8 h-0.5 max-md:hidden bg-yellow-500/50" /><span>Bienvenue chez Marcel Click & Services</span>
         </h3>

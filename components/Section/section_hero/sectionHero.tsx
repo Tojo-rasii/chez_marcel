@@ -41,11 +41,11 @@ export default function SectionHero({
   );
 
   return (
-    <div className="p-5 max-lg:py-0 h-[80vh] w-full  bg-transparent">
+    <div className="p-5 max-lg:py-0 h-[80vh] max-md:flex max-md:items-center w-full  bg-transparent">
       <div
         ref={gridRef}
         className={`grid ${activePage === 2 ? "grid-cols-1" : ""} grid-cols-1 ${activePage === 1 ? "grid-cols-2 max-lg:flex max-md:flex-col max-md:py-0" : ""
-          } gap-5 items-center max-md:justify-center h-full`}
+          } gap-5 items-center max-md:justify-center h-full max-md:h-max`}
       >
         {activePage !== 2 && activePage !== 3 && activePage !== 4 && activePage !== 5 && activePage !== 6 && (
           <div

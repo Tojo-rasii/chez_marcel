@@ -792,7 +792,7 @@ export function RadialMenu({
 
   return (
     <>
-      <div className={`relative isolate max-md:h-[16em] max-md:overflow-visible ${!isMinimal && "grid grid-cols-3 max-md:grid-cols-1"} w-full mx-auto overflow-hidden`}>
+      <div className={`relative isolate  max-md:overflow-visible max-md:h-full ${!isMinimal && "grid grid-cols-3 max-md:h-[16em] max-md:grid-cols-1"} w-full mx-auto overflow-hidden`}>
         {/* ================= ARRIÈRE-PLAN DYNAMIQUE : chaque service illustre le fond à tour de rôle ================= */}
         {/* Masqué en mode minimal (page 1) : il ne doit rester que la roue + le chargement, rien d'autre en fond */}
         {/* {!isMinimal && (
@@ -816,12 +816,12 @@ export function RadialMenu({
         </div>
       )} */}
         {!isMinimal && (
-          <div className="w-full max-md:hidden grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4 py-8">
+          <div className="w-full max-md:px-0 max-md:py-0 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4 py-8">
 
             {/* ================= COLONNE GAUCHE : DESCRIPTION (HOVER/AUTOPLAY) ================= */}
             {/* Masquée en mode minimal (page 1) : on ne garde que la roue + le chargement */}
             {!isMinimal && (
-              <div className="lg:col-span-3 space-y-4 flex flex-col justify-center min-h-[280px]">
+              <div className="lg:col-span-3 space-y-4 flex flex-col justify-center max-md:min-h-max min-h-[280px]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeIndex}
@@ -834,14 +834,14 @@ export function RadialMenu({
                     {/* <span className="text-md font-bold mb-2 font-heading uppercase text-black mb-4 dark:text-yellow-400 ">
                     {activeItem?.label}
                   </span> */}
-                    <h3 className="font-heading uppercase font-semibold text-md max-md:text-lg max-md:text-center flex items-center gap-3">
+                    <h3 className="font-heading uppercase font-semibold text-md max-md:text-sm max-md:text-lg max-md:text-center flex items-center gap-3">
 
                       <Separator className="w-5 h-0.5 bg-yellow-500" /><span>{activeItem?.label}</span>
                     </h3>
-                    <h2 className="text-4xl p-1 font-extrabold font-heading text-yellow dark:text-neutral-50 tracking-tight">
+                    <h2 className="text-4xl p-1 max-md:text-3xl font-extrabold font-heading text-yellow dark:text-neutral-50 tracking-tight">
                       {activeItem?.title}
                     </h2>
-                    <p className="text-sm  text-neutral-600 dark:text-neutral-400 leading-relaxed balance">
+                    <p className="text-sm max-md:hidden text-neutral-600 dark:text-neutral-400 leading-relaxed balance">
                       {activeItem?.description}
                     </p>
                   </motion.div>
@@ -1015,7 +1015,7 @@ export function RadialMenu({
         {/* ================= COLONNE DROITE : LES ACTION BUTTONS (CLIC) ================= */}
         {/* Masquée en mode minimal (page 1) : pas d'actions déclenchables ici */}
         {!isMinimal && selectedItem && (
-          <div className="min-h-full max-md:bg-white dark:max-md:bg-[#0D0D0D] max-md:w-full  max-md:right-0  max-md:p-2 w-70 absolute right-9 z-999 flex flex-col justify-center">
+          <div className="min-h-full max-md:bg-white dark:max-md:bg-transparent max-md:top-1/2 max-md:-translate-y-1/2 max-md:min-h-max max-md:w-full  max-md:right-0  max-md:p-2 w-70 absolute right-9 z-999 flex flex-col justify-center">
             <AnimatePresence mode="wait">
               {selectedItem ? (
                 <motion.div
@@ -1030,7 +1030,7 @@ export function RadialMenu({
                   {/* X CLOSE BUTTON */}
                   <button
                     onClick={() => setSelectedItem(null)}
-                    className="absolute top-2 cursor-pointer right-0 p-1 rounded-full text-neutral-500 hover:text-black border  dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
+                    className="absolute top-2 max-md:-top-3 cursor-pointer right-0 p-1 rounded-full text-neutral-500 hover:text-black border  dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
                     aria-label="Close"
                   >
                     <X size={20} />
@@ -1079,9 +1079,17 @@ export function RadialMenu({
         )}
 
         {!isMinimal && (
+          <>
           <div className="px-4 max-md:hidden top-0 pb-8 -mt-2">
             <ThumbnailRail items={menuItems} activeIndex={activeIndex} onHover={handleHover} onSelect={handlePick} />
           </div>
+          <div className="hidden max-md:flex">
+               <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed balance">
+                      {activeItem?.description}
+                    </p>
+          </div>
+          </>
+          
         )}
 
         {!isMinimal && (
