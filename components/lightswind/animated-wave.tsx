@@ -103,8 +103,8 @@ const getDeviceInfo = (): DeviceInfo => {
 };
 
 const addEase = (
-  pos: THREE.Vector3,
-  to: { x: number; y: number; z: number },
+  pos: THREE.Vector3 | THREE.Euler,
+  to: THREE.Vector3 | THREE.Euler,
   ease: number
 ) => {
   pos.x += (to.x - pos.x) / ease;
@@ -272,7 +272,7 @@ const AnimatedWave: React.FC<AnimatedWaveProps> = ({
       // Initial position of the entire wave group in 3D space
       move: new THREE.Vector3(0, waveOffsetY, cameraDistance),
       // Initial rotation of the entire wave group
-      look: new THREE.Vector3((waveRotation * Math.PI) / 180, 0, 0), // Convert degrees to radians for X-axis rotation
+      look: new THREE.Euler((waveRotation * Math.PI) / 180, 0, 0), // Convert degrees to radians for X-axis rotation
 
       // Mouse distortion properties
       mouseDistortionStrength: mouseDistortionStrength,
@@ -370,12 +370,11 @@ const AnimatedWave: React.FC<AnimatedWaveProps> = ({
             const distY_mouse = originalY - currentMouseY * 0.5;
             const dist_mouse = Math.sqrt(distX_mouse * distX_mouse + distY_mouse * distY_mouse);
 
-            // Generate a 3D Simplex noise value for the ripple.
-            // `this.distortionTime` makes the ripple evolve over time.
+            // Generate a 2D Simplex noise value for the ripple.
+            // The noise coordinates are offset by `this.distortionTime` to animate it over time.
             const mouseRippleNoise = this.simplex(
-              distX_mouse / this.mouseDistortionSmoothness, // Smoothness of the mouse ripple
-              distY_mouse / this.mouseDistortionSmoothness,
-              this.distortionTime // Third dimension for time-based evolution
+              distX_mouse / this.mouseDistortionSmoothness + this.distortionTime, // Smoothness of the mouse ripple with time offset
+              distY_mouse / this.mouseDistortionSmoothness // Smoothness of the mouse ripple
             ) * this.mouseDistortionStrength; // Overall strength of the mouse ripple
 
             // Apply a falloff (diminishing effect) as the vertex gets further from the mouse.

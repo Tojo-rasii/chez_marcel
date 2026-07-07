@@ -9,7 +9,7 @@ import React, {
 } from "react";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/lightswind/card";
-import { useIsMobile } from "../hooks/use-mobile";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export interface ThreeDCarouselItem {
   id: number;
