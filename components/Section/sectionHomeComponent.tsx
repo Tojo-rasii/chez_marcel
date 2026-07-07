@@ -67,53 +67,34 @@ export default function SectionHomeComponent() {
     }
     const rafId = requestAnimationFrame(raf);
 
-    const isMobile = window.innerWidth < 768;
 
     // ✅ Desktop scroll (wheel only)
-    const observer = Observer.create({
-      target: window,
-      type: "wheel",
-      wheelSpeed: 1,
-      tolerance: 10,
-      preventDefault: true,
-      onDown: () => goToPage(activePageRef.current + 1),
-      onUp: () => goToPage(activePageRef.current - 1),
-    });
+  const observer = Observer.create({
+  target: window,
+  type: "wheel,touch,pointer",
+  wheelSpeed: 1,
+  tolerance: 25,
+  preventDefault: false,
+  lockAxis: true,
+
+  onDown: () => {
+    goToPage(activePageRef.current + 1);
+  },
+
+  onUp: () => {
+    goToPage(activePageRef.current - 1);
+  },
+});
 
     // ✅ Mobile swipe fallback (IMPORTANT)
-    let startY = 0;
-
-    const onTouchStart = (e: TouchEvent) => {
-      startY = e.touches[0].clientY;
-    };
-
-    const onTouchEnd = (e: TouchEvent) => {
-      const endY = e.changedTouches[0].clientY;
-      const diff = startY - endY;
-
-      if (Math.abs(diff) < 50) return;
-
-      if (diff > 0) {
-        goToPage(activePageRef.current + 1);
-      } else {
-        goToPage(activePageRef.current - 1);
-      }
-    };
-
-    if (isMobile) {
-      window.addEventListener("touchstart", onTouchStart, { passive: true });
-      window.addEventListener("touchend", onTouchEnd, { passive: true });
-    }
+  
 
     return () => {
       observer.kill();
       lenis.destroy();
       cancelAnimationFrame(rafId);
 
-      if (isMobile) {
-        window.removeEventListener("touchstart", onTouchStart);
-        window.removeEventListener("touchend", onTouchEnd);
-      }
+  
     };
   }, []);
 
