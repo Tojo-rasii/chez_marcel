@@ -10,7 +10,7 @@ export default function HomeComponent() {
         <img
           src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=400&auto=format&fit=crop" // Remplace par ton image
           alt="Background"
-          className="object-cover h-full scale-110 blur-xl"
+          className="object-cover w-full h-full scale-110 blur-xl"
         />
         <div className="absolute inset-0 bg-white/80 dark:bg-black/50" />
       </div>

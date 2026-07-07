@@ -11,31 +11,33 @@ import { RadioGroup, RadioGroupItem } from "@/components/lightswind/radio-group"
 import { Switch } from "@/components/lightswind/switch";
 
 export default function NavLinks() {
-  const [darkMode, setDarkMode] = useState(false);
   const [language, setLanguage] = useState<"fr" | "mg">("fr");
 
   // Charger le thème sauvegardé
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
+ const [darkMode, setDarkMode] = useState(true);
 
-    if (savedTheme === "dark") {
-      setDarkMode(true);
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
+useEffect(() => {
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme) {
+    const isDark = savedTheme === "dark";
+    setDarkMode(isDark);
+    document.documentElement.classList.toggle("dark", isDark);
+  } else {
+    // Dark par défaut
+    setDarkMode(true);
+    document.documentElement.classList.add("dark");
+    localStorage.setItem("theme", "dark");
+  }
+}, []);
 
   // Changer le thème
-  const handleDarkMode = (checked: boolean) => {
-    setDarkMode(checked);
+const handleDarkMode = (checked: boolean) => {
+  setDarkMode(checked);
 
-    if (checked) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  };
+  document.documentElement.classList.toggle("dark", checked);
+  localStorage.setItem("theme", checked ? "dark" : "light");
+};
 
 
   const nav = [
