@@ -314,7 +314,7 @@ function CatalogModal({
                     </button>
                   </div>
 
-                  
+
                 </CarouselItem>
               );
             })}
@@ -791,11 +791,11 @@ export function RadialMenu({
   }
 
   return (
-     <>
-    <div className={`relative isolate ${!isMinimal && "grid grid-cols-3 max-md:grid-cols-1"} w-full mx-auto overflow-hidden`}>
-      {/* ================= ARRIÈRE-PLAN DYNAMIQUE : chaque service illustre le fond à tour de rôle ================= */}
-      {/* Masqué en mode minimal (page 1) : il ne doit rester que la roue + le chargement, rien d'autre en fond */}
-      {/* {!isMinimal && (
+    <>
+      <div className={`relative isolate max-md:h-[16em] max-md:overflow-visible ${!isMinimal && "grid grid-cols-3 max-md:grid-cols-1"} w-full mx-auto overflow-hidden`}>
+        {/* ================= ARRIÈRE-PLAN DYNAMIQUE : chaque service illustre le fond à tour de rôle ================= */}
+        {/* Masqué en mode minimal (page 1) : il ne doit rester que la roue + le chargement, rien d'autre en fond */}
+        {/* {!isMinimal && (
         <div className="absolute inset-0 -z-10">
           <AnimatePresence mode="sync">
             <motion.img
@@ -815,301 +815,301 @@ export function RadialMenu({
           <div className="absolute inset-0 bg-gradient-to-b from-white/92 via-white/85 to-white/95 dark:from-neutral-950/92 dark:via-neutral-950/85 dark:to-neutral-950/95" />
         </div>
       )} */}
-      {!isMinimal && (
-        <div className="w-full max-md:hidden grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4 py-8">
+        {!isMinimal && (
+          <div className="w-full max-md:hidden grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4 py-8">
 
-          {/* ================= COLONNE GAUCHE : DESCRIPTION (HOVER/AUTOPLAY) ================= */}
-          {/* Masquée en mode minimal (page 1) : on ne garde que la roue + le chargement */}
-          {!isMinimal && (
-            <div className="lg:col-span-3 space-y-4 flex flex-col justify-center min-h-[280px]">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeIndex}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
-                  transition={{ duration: 0.3 }}
-                  className="space-y-4"
-                >
-                  {/* <span className="text-md font-bold mb-2 font-heading uppercase text-black mb-4 dark:text-yellow-400 ">
+            {/* ================= COLONNE GAUCHE : DESCRIPTION (HOVER/AUTOPLAY) ================= */}
+            {/* Masquée en mode minimal (page 1) : on ne garde que la roue + le chargement */}
+            {!isMinimal && (
+              <div className="lg:col-span-3 space-y-4 flex flex-col justify-center min-h-[280px]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeIndex}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    transition={{ duration: 0.3 }}
+                    className="space-y-4"
+                  >
+                    {/* <span className="text-md font-bold mb-2 font-heading uppercase text-black mb-4 dark:text-yellow-400 ">
                     {activeItem?.label}
                   </span> */}
-                  <h3 className="font-heading uppercase font-semibold text-md max-md:text-lg max-md:text-center flex items-center gap-3">
+                    <h3 className="font-heading uppercase font-semibold text-md max-md:text-lg max-md:text-center flex items-center gap-3">
 
-                    <Separator className="w-5 h-0.5 bg-yellow-500" /><span>{activeItem?.label}</span>
-                  </h3>
-                  <h2 className="text-4xl p-1 font-extrabold font-heading text-yellow dark:text-neutral-50 tracking-tight">
-                    {activeItem?.title}
-                  </h2>
-                  <p className="text-sm  text-neutral-600 dark:text-neutral-400 leading-relaxed balance">
-                    {activeItem?.description}
-                  </p>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* ================= COLONNE CENTRALE : LE MENU RADIAL ================= */}
-      <div className={`${activePage !== 1 ? "items-end justify-end  self-end" : ""}  grid relative items-center justify-center bg-transparent select-none w-full`}>
-
-
+                      <Separator className="w-5 h-0.5 bg-yellow-500" /><span>{activeItem?.label}</span>
+                    </h3>
+                    <h2 className="text-4xl p-1 font-extrabold font-heading text-yellow dark:text-neutral-50 tracking-tight">
+                      {activeItem?.title}
+                    </h2>
+                    <p className="text-sm  text-neutral-600 dark:text-neutral-400 leading-relaxed balance">
+                      {activeItem?.description}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* ================= COLONNE CENTRALE : LE MENU RADIAL ================= */}
-        <div
-          className={cn(
-            "flex relative items-center max-md:scale-80 justify-center select-none w-full",
-            isMinimal ? "lg:col-span-6" : "lg:col-span-6"
-          )}
-        >
+        <div className={`${activePage !== 1 ? "items-end justify-end  self-end" : ""}  grid relative items-center justify-center bg-transparent select-none w-full`}>
 
-          {pageNumber === 2 && (
-            <div className="absolute left-[-100px] hidden flex-col items-center justify-center w-24 text-center">
-              <span className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">Suivant</span>
-              <div className="flex items-center gap-1 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-                <ChevronLeft className="size-3 animate-pulse" />
-                <span className="truncate max-w-[80px]">{nextItem?.label}</span>
-              </div>
-            </div>
-          )}
 
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={menuTransition}
-            style={{ width: size, height: size }}
-            className="relative rounded-full overflow-hidden bg-transparent dark:bg-transparent border border-neutral-800/0"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
+
+          {/* ================= COLONNE CENTRALE : LE MENU RADIAL ================= */}
+          <div
+            className={cn(
+              "flex relative max-md:w-[25em] items-center max-md:scale-80 justify-center select-none w-full",
+              isMinimal ? "lg:col-span-6" : "lg:col-span-6"
+            )}
           >
-            <svg
-              className="size-full relative z-10"
-              viewBox={`${-radius} ${-radius} ${radius * 2} ${radius * 2}`}
-              role="menu"
-              aria-label="Menu des services"
+
+            {pageNumber === 2 && (
+              <div className="absolute left-[-100px] hidden flex-col items-center justify-center w-24 text-center">
+                <span className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">Suivant</span>
+                <div className="flex items-center gap-1 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                  <ChevronLeft className="size-3 animate-pulse" />
+                  <span className="truncate max-w-[80px]">{nextItem?.label}</span>
+                </div>
+              </div>
+            )}
+
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={menuTransition}
+              style={{ width: size, height: size }}
+              className="relative rounded-full overflow-hidden bg-transparent dark:bg-transparent border border-neutral-800/0"
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
             >
-              {menuItems.map((item, index) => {
-                const Icon = item.icon;
-                const { outerPath, wedgePath, iconPos } = wedgeGeometry[index];
-                const active = activeIndex === index;
+              <svg
+                className="size-full relative z-10"
+                viewBox={`${-radius} ${-radius} ${radius * 2} ${radius * 2}`}
+                role="menu"
+                aria-label="Menu des services"
+              >
+                {menuItems.map((item, index) => {
+                  const Icon = item.icon;
+                  const { outerPath, wedgePath, iconPos } = wedgeGeometry[index];
+                  const active = activeIndex === index;
 
-                return (
-                  <g
-                    key={item.id}
-                    role="menuitem"
-                    tabIndex={0}
-                    aria-label={item.label}
-                    aria-current={active}
-                    onMouseEnter={() => handleHover(index)}
-                    onFocus={() => handleHover(index)}
-                    onClick={() => {
-                      handlePick(item);
-                     setActivePage(2)
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
+                  return (
+                    <g
+                      key={item.id}
+                      role="menuitem"
+                      tabIndex={0}
+                      aria-label={item.label}
+                      aria-current={active}
+                      onMouseEnter={() => handleHover(index)}
+                      onFocus={() => handleHover(index)}
+                      onClick={() => {
                         handlePick(item);
-                      }
-                    }}
-                    className="cursor-pointer fill-black outline-none"
-                  >
-                    <path
-                      d={outerPath}
-                      className={cn("transition-colors duration-300", active ? "fill-yellow-500 stroke-black" : "fill-white/30 dark:fill-gray-500/20 stroke-black/50")}
-                    />
-                    <path
-                      d={wedgePath}
-                      className={cn(
-                        "transition-all duration-300 stroke-black/20 dark:stroke-white/5",
-                        active ? "fill-yellow-500 stroke-black/30" : "fill-white/20 dark:fill-black/20 dark:stroke-gray-500/20 stroke-black/70"
-                      )}
-                    />
-                    <foreignObject x={iconPos.x - 22} y={iconPos.y - 22} width={44} height={44}>
-                      <div className="flex h-full w-full items-center justify-center">
-                        {/* Badge circulaire autour de l'icône : rendu plus soigné et lisible qu'une icône nue */}
-                        <div
-                          className={cn(
-                            "flex items-center justify-center rounded-full transition-all duration-300 border",
-                            active
-                              ? "size-9 bg-transparent/15 border-yellow scale-100"
-                              : "size-8 bg-white/5 border-white/10 group-hover:border-white/30"
-                          )}
-                        >
-                          <Icon
-                            size={iconSize}
-                            strokeWidth={active ? 2.25 : 1.75}
+                        setActivePage(2)
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          handlePick(item);
+                        }
+                      }}
+                      className="cursor-pointer fill-black outline-none"
+                    >
+                      <path
+                        d={outerPath}
+                        className={cn("transition-colors duration-300", active ? "fill-yellow-500 stroke-black" : "fill-white/30 dark:fill-gray-500/20 stroke-black/50")}
+                      />
+                      <path
+                        d={wedgePath}
+                        className={cn(
+                          "transition-all duration-300 stroke-black/20 dark:stroke-white/5",
+                          active ? "fill-yellow-500 stroke-black/30" : "fill-white/20 dark:fill-black/20 dark:stroke-gray-500/20 stroke-black/70"
+                        )}
+                      />
+                      <foreignObject x={iconPos.x - 22} y={iconPos.y - 22} width={44} height={44}>
+                        <div className="flex h-full w-full items-center justify-center">
+                          {/* Badge circulaire autour de l'icône : rendu plus soigné et lisible qu'une icône nue */}
+                          <div
                             className={cn(
-                              "transition-colors duration-300",
-                              active ? "text-yellow" : "text-black/70 dark:text-white/80"
+                              "flex items-center justify-center rounded-full transition-all duration-300 border",
+                              active
+                                ? "size-9 bg-transparent/15 border-yellow scale-100"
+                                : "size-8 bg-white/5 border-white/10 group-hover:border-white/30"
                             )}
-                          />
+                          >
+                            <Icon
+                              size={iconSize}
+                              strokeWidth={active ? 2.25 : 1.75}
+                              className={cn(
+                                "transition-colors duration-300",
+                                active ? "text-yellow" : "text-black/70 dark:text-white/80"
+                              )}
+                            />
+                          </div>
                         </div>
-                      </div>
-                    </foreignObject>
-                  </g>
-                );
-              })}
+                      </foreignObject>
+                    </g>
+                  );
+                })}
 
-              <circle cx={0} cy={0} r={centerRadius} className="fill-white dark:fill-neutral-900/95" />
+                <circle cx={0} cy={0} r={centerRadius} className="fill-white dark:fill-neutral-900/95" />
 
-              {/* Piste de fond de la barre de progression, visible même en pause */}
-              <circle
-                cx={0}
-                cy={0}
-                r={progressRingRadius}
-                className="fill-gray-300/50 dark:fill-black/50 stroke-black/30 dark:stroke-white/5"
-                strokeWidth={1}
-              />
-
-              {!isPaused && (
+                {/* Piste de fond de la barre de progression, visible même en pause */}
                 <circle
                   cx={0}
                   cy={0}
                   r={progressRingRadius}
-                  className="fill-none stroke-yellow-500 transition-[stroke-dashoffset] duration-75 ease-linear"
-                  strokeWidth={3}
-                  strokeDasharray={circumference}
-                  strokeDashoffset={strokeDashoffset}
-                  strokeLinecap="round"
-                  transform="rotate(-90)"
+                  className="fill-gray-300/50 dark:fill-black/50 stroke-black/30 dark:stroke-white/5"
+                  strokeWidth={1}
                 />
-              )}
 
-              <foreignObject
-                x={-(centerRadius - 10)}
-                y={-(centerRadius - 10)}
-                width={(centerRadius - 10) * 2}
-                height={(centerRadius - 10) * 2}
-                className="pointer-events-none"
-              >
-                <div className="flex flex-col h-full w-full items-center justify-center text-center p-4">
-                  <div className="mb-2 flex items-center justify-center size-14 rounded-full bg-yellow-500 dark:bg-yellow-950/40 border border-black dark:border-yellow-900 text-black dark:text-yellow-400 transition-transform duration-300">
-                    {ActiveIcon && <ActiveIcon size={28} strokeWidth={1.75} />}
+                {!isPaused && (
+                  <circle
+                    cx={0}
+                    cy={0}
+                    r={progressRingRadius}
+                    className="fill-none stroke-yellow-500 transition-[stroke-dashoffset] duration-75 ease-linear"
+                    strokeWidth={3}
+                    strokeDasharray={circumference}
+                    strokeDashoffset={strokeDashoffset}
+                    strokeLinecap="round"
+                    transform="rotate(-90)"
+                  />
+                )}
+
+                <foreignObject
+                  x={-(centerRadius - 10)}
+                  y={-(centerRadius - 10)}
+                  width={(centerRadius - 10) * 2}
+                  height={(centerRadius - 10) * 2}
+                  className="pointer-events-none"
+                >
+                  <div className="flex flex-col h-full w-full items-center justify-center text-center p-4">
+                    <div className="mb-2 flex items-center justify-center size-14 rounded-full bg-yellow-500 dark:bg-yellow-950/40 border border-black dark:border-yellow-900 text-black dark:text-yellow-400 transition-transform duration-300">
+                      {ActiveIcon && <ActiveIcon size={28} strokeWidth={1.75} />}
+                    </div>
+                    <span className="text-lg font-heading font-bold dark:text-neutral-100 tracking-tight">
+                      {activeItem?.label}
+                    </span>
                   </div>
-                  <span className="text-lg font-heading font-bold dark:text-neutral-100 tracking-tight">
-                    {activeItem?.label}
-                  </span>
+                </foreignObject>
+              </svg>
+            </motion.div>
+
+
+
+
+            {pageNumber === 2 && (
+              <div className="absolute right-[-100px] hidden flex-col items-center justify-center w-24 text-center">
+                <span className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">Précédent</span>
+                <div className="flex items-center gap-1 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                  <span className="truncate max-w-[80px]">{prevItem?.label}</span>
+                  <ChevronRight className="size-3 animate-pulse" />
                 </div>
-              </foreignObject>
-            </svg>
-          </motion.div>
-
-
-
-
-          {pageNumber === 2 && (
-            <div className="absolute right-[-100px] hidden flex-col items-center justify-center w-24 text-center">
-              <span className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">Précédent</span>
-              <div className="flex items-center gap-1 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-                <span className="truncate max-w-[80px]">{prevItem?.label}</span>
-                <ChevronRight className="size-3 animate-pulse" />
-              </div>
-            </div>
-          )}
-        </div>
-
-
-      </div>
-      {/* ================= COLONNE DROITE : LES ACTION BUTTONS (CLIC) ================= */}
-      {/* Masquée en mode minimal (page 1) : pas d'actions déclenchables ici */}
-      {!isMinimal && selectedItem && (
-        <div className="min-h-full max-md:bg-white dark:max-md:bg-[#0D0D0D] max-md:w-full  max-md:right-0  max-md:p-2 w-70 absolute right-9 z-999 flex flex-col justify-center">
-          <AnimatePresence mode="wait">
-            {selectedItem ? (
-              <motion.div
-                key={selectedItem.id}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-                className="space-y-3 bg-white dark:bg-neutral-900/90 p-5  border border-neutral-400 dark:border-neutral-800"
-              >
-
-                {/* X CLOSE BUTTON */}
-                <button
-                  onClick={() => setSelectedItem(null)}
-                  className="absolute top-2 cursor-pointer right-0 p-1 rounded-full text-neutral-500 hover:text-black border  dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
-                  aria-label="Close"
-                >
-                  <X size={20} />
-                </button>
-                <div className="mb-4 flex items-center flex-col">
-
-                  <h3 className="font-heading text-sm py-0 flex items-center gap-2">
-                    <Separator className="w-4 h-0.5 bg-black/30" /><span>Option choisie</span>
-                    <Separator className="w-4 h-0.5 bg-black/30" /></h3>
-                  <h2 className="font-bold text-xl uppercase mt-1 font-heading text-neutral-900 dark:text-white">{selectedItem.label}</h2>
-                </div>
-
-                <button
-                  onClick={() => setActiveModal("history")}
-                  className="w-full py-3 border uppercase px-4 flex items-center justify-center gap-2 bg-yellow-500/90 text-black hover:bg-yellow-500 active:scale-[0.98]  font-semibold text-xs rounded-full transition-all  cursor-pointer"
-                >
-                  <ShoppingBag size={16} />
-                  Commande
-                </button>
-
-                <button
-                  onClick={() => setActiveModal("calendar")}
-                  className="w-full py-3 uppercase px-4 flex items-center justify-center gap-2 bg-neutral-200 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 active:scale-[0.98] text-neutral-900 dark:text-neutral-100 font-medium text-xs rounded-full border-black/60 border  cursor-pointer transition-all"
-                >
-                  <CalendarCheck2 size={16} />
-                  Réserver
-                </button>
-
-                <button
-                  onClick={() => setActiveModal("catalog")}
-                  className="w-full py-3 uppercase px-4 flex items-center justify-center gap-2 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800 active:scale-[0.98] text-neutral-700 dark:text-neutral-300 font-medium text-xs rounded-full border-black/60 border cursor-pointer transition-all"
-                >
-                  <LayoutGrid size={16} />
-                  Catalogue
-                </button>
-              </motion.div>
-            ) : (
-              <div className="flex hidden h-full flex-col items-center justify-center p-6 border-2 border-dashed border-neutral-200 dark:border-neutral-800 rounded-2xl text-center bg-white/60 dark:bg-neutral-900/60 backdrop-blur-md">
-                <p className="text-xs text-neutral-400 dark:text-neutral-500 font-medium max-w-[180px]">
-                  Cliquez sur un service du menu pour débloquer les actions de réservation.
-                </p>
               </div>
             )}
+          </div>
+
+
+        </div>
+        {/* ================= COLONNE DROITE : LES ACTION BUTTONS (CLIC) ================= */}
+        {/* Masquée en mode minimal (page 1) : pas d'actions déclenchables ici */}
+        {!isMinimal && selectedItem && (
+          <div className="min-h-full max-md:bg-white dark:max-md:bg-[#0D0D0D] max-md:w-full  max-md:right-0  max-md:p-2 w-70 absolute right-9 z-999 flex flex-col justify-center">
+            <AnimatePresence mode="wait">
+              {selectedItem ? (
+                <motion.div
+                  key={selectedItem.id}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-3 bg-white dark:bg-neutral-900/90 p-5  border border-neutral-400 dark:border-neutral-800"
+                >
+
+                  {/* X CLOSE BUTTON */}
+                  <button
+                    onClick={() => setSelectedItem(null)}
+                    className="absolute top-2 cursor-pointer right-0 p-1 rounded-full text-neutral-500 hover:text-black border  dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
+                    aria-label="Close"
+                  >
+                    <X size={20} />
+                  </button>
+                  <div className="mb-4 flex items-center flex-col">
+
+                    <h3 className="font-heading text-sm py-0 flex items-center gap-2">
+                      <Separator className="w-4 h-0.5 bg-black/30" /><span>Option choisie</span>
+                      <Separator className="w-4 h-0.5 bg-black/30" /></h3>
+                    <h2 className="font-bold text-xl uppercase mt-1 font-heading text-neutral-900 dark:text-white">{selectedItem.label}</h2>
+                  </div>
+
+                  <button
+                    onClick={() => setActiveModal("history")}
+                    className="w-full py-3 border uppercase px-4 flex items-center justify-center gap-2 bg-yellow-500/90 text-black hover:bg-yellow-500 active:scale-[0.98]  font-semibold text-xs rounded-full transition-all  cursor-pointer"
+                  >
+                    <ShoppingBag size={16} />
+                    Commande
+                  </button>
+
+                  <button
+                    onClick={() => setActiveModal("calendar")}
+                    className="w-full py-3 uppercase px-4 flex items-center justify-center gap-2 bg-neutral-200 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 active:scale-[0.98] text-neutral-900 dark:text-neutral-100 font-medium text-xs rounded-full border-black/60 border  cursor-pointer transition-all"
+                  >
+                    <CalendarCheck2 size={16} />
+                    Réserver
+                  </button>
+
+                  <button
+                    onClick={() => setActiveModal("catalog")}
+                    className="w-full py-3 uppercase px-4 flex items-center justify-center gap-2 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800 active:scale-[0.98] text-neutral-700 dark:text-neutral-300 font-medium text-xs rounded-full border-black/60 border cursor-pointer transition-all"
+                  >
+                    <LayoutGrid size={16} />
+                    Catalogue
+                  </button>
+                </motion.div>
+              ) : (
+                <div className="flex hidden h-full flex-col items-center justify-center p-6 border-2 border-dashed border-neutral-200 dark:border-neutral-800 rounded-2xl text-center bg-white/60 dark:bg-neutral-900/60 backdrop-blur-md">
+                  <p className="text-xs text-neutral-400 dark:text-neutral-500 font-medium max-w-[180px]">
+                    Cliquez sur un service du menu pour débloquer les actions de réservation.
+                  </p>
+                </div>
+              )}
+            </AnimatePresence>
+          </div>
+        )}
+
+        {!isMinimal && (
+          <div className="px-4 max-md:hidden top-0 pb-8 -mt-2">
+            <ThumbnailRail items={menuItems} activeIndex={activeIndex} onHover={handleHover} onSelect={handlePick} />
+          </div>
+        )}
+
+        {!isMinimal && (
+          <AnimatePresence>
+            {selectedItem && activeModal === "catalog" && (
+              <CatalogModal
+                item={selectedItem}
+                addedIds={addedCatalogIds}
+                onPick={handleAddOrder}
+                onClose={() => setActiveModal(null)}
+              />
+            )}
+            {selectedItem && activeModal === "calendar" && (
+              <CalendarModal item={selectedItem} onConfirm={handleAddReservation} onClose={() => setActiveModal(null)} />
+            )}
+            {selectedItem && activeModal === "history" && (
+              <HistoryModal
+                item={selectedItem}
+                orders={orders}
+                reservations={reservations}
+                onClose={() => setActiveModal(null)}
+              />
+            )}
           </AnimatePresence>
-        </div>
-      )}
+        )
+        }
 
-      {!isMinimal && (
-        <div className="px-4 max-md:hidden top-0 pb-8 -mt-2">
-          <ThumbnailRail items={menuItems} activeIndex={activeIndex} onHover={handleHover} onSelect={handlePick} />
-        </div>
-      )}
-
-      {!isMinimal && (
-        <AnimatePresence>
-          {selectedItem && activeModal === "catalog" && (
-            <CatalogModal
-              item={selectedItem}
-              addedIds={addedCatalogIds}
-              onPick={handleAddOrder}
-              onClose={() => setActiveModal(null)}
-            />
-          )}
-          {selectedItem && activeModal === "calendar" && (
-            <CalendarModal item={selectedItem} onConfirm={handleAddReservation} onClose={() => setActiveModal(null)} />
-          )}
-          {selectedItem && activeModal === "history" && (
-            <HistoryModal
-              item={selectedItem}
-              orders={orders}
-              reservations={reservations}
-              onClose={() => setActiveModal(null)}
-            />
-          )}
-        </AnimatePresence>
-      )
-      }
-
-    </div >
+      </div >
     </>
   );
 }

@@ -44,12 +44,12 @@ export default function SectionHero({
     <div className="p-5 max-lg:py-0 h-[80vh] w-full  bg-transparent">
       <div
         ref={gridRef}
-        className={`grid ${activePage === 2 ? "grid-cols-1" : ""} grid-cols-1 ${activePage === 1 ? "grid-cols-2 max-lg:grid-cols-1 max-md:py-0" : ""
-          } gap-5 items-center h-full`}
+        className={`grid ${activePage === 2 ? "grid-cols-1" : ""} grid-cols-1 ${activePage === 1 ? "grid-cols-2 max-lg:flex max-md:flex-col max-md:py-0" : ""
+          } gap-5 items-center max-md:justify-center h-full`}
       >
         {activePage !== 2 && activePage !== 3 && activePage !== 4 && activePage !== 5 && activePage !== 6 && (
           <div
-            className={`h-full max-md:items-start flex items-center ${activePage === 2 ? "justify-center col-span-2 text-center" : ""
+            className={`h-full max-md:h-max max-md:items-start flex items-center ${activePage === 2 ? "justify-center col-span-2 text-center" : ""
               }`}
           >
             <HeroDescription page={activePage} />
@@ -57,7 +57,7 @@ export default function SectionHero({
         )}
 
         {activePage !== 3 && activePage !== 4 && activePage !== 5 && activePage !== 6 && (
-          <div className="h-full m-auto bg-transparent200 w-full flex items-center justify-center">
+          <div className="h-full  max-md:h-max max-md:m-0 m-auto bg-transparent200 w-full flex items-center justify-center">
             <HeroServiceContenu page={activePage} activePage={activePage} setActivePage={setActivePage}/>
           </div>
         )}
