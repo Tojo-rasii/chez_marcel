@@ -69,32 +69,63 @@ export default function SectionHomeComponent() {
 
 
     // ✅ Desktop scroll (wheel only)
-  const observer = Observer.create({
-  target: window,
-  type: "wheel,touch,pointer",
-  wheelSpeed: 1,
-  tolerance: 25,
-  preventDefault: false,
-  lockAxis: true,
+    let touchStartY = 0;
 
-  onDown: () => {
-    goToPage(activePageRef.current + 1);
-  },
+    const observer = Observer.create({
+      target: window,
+      type: "wheel,touch",
+      wheelSpeed: 1,
+      tolerance: 20,
+      preventDefault: false,
 
-  onUp: () => {
-    goToPage(activePageRef.current - 1);
-  },
-});
+      // Desktop
+      onDown(self) {
+        if (self.event?.type === "wheel") {
+          goToPage(activePageRef.current + 1);
+        }
+      },
+
+      onUp(self) {
+        if (self.event?.type === "wheel") {
+          goToPage(activePageRef.current - 1);
+        }
+      },
+
+      // Mobile
+      onPress(self) {
+        if ("clientY" in self.event) {
+          const event = self.event as { clientY: number };
+          touchStartY = event.clientY;
+        }
+      },
+
+      onRelease(self) {
+        if (!("clientY" in self.event)) return;
+
+        const event = self.event as { clientY: number };
+        const delta = touchStartY - event.clientY;
+
+        if (Math.abs(delta) < 40) return;
+
+        if (delta > 0) {
+          // doigt vers le haut = vrai scroll vers le bas = page suivante
+          goToPage(activePageRef.current + 1);
+        } else {
+          // doigt vers le bas = vrai scroll vers le haut = page précédente
+          goToPage(activePageRef.current - 1);
+        }
+      },
+    });
 
     // ✅ Mobile swipe fallback (IMPORTANT)
-  
+
 
     return () => {
       observer.kill();
       lenis.destroy();
       cancelAnimationFrame(rafId);
 
-  
+
     };
   }, []);
 
