@@ -69,53 +69,34 @@ export default function SectionHomeComponent() {
 
 
     // ✅ Desktop scroll (wheel only)
-    let touchStartY = 0;
+ const observer = Observer.create({
+  target: window,
+  type: "wheel,touch,pointer",
+  wheelSpeed: 1,
+  tolerance: 25,
+  preventDefault: false,
+  lockAxis: true,
 
-    const observer = Observer.create({
-      target: window,
-      type: "wheel,touch",
-      wheelSpeed: 1,
-      tolerance: 20,
-      preventDefault: false,
+  onDown: (self) => {
+    if (self.event?.type.startsWith("touch")) {
+      // Mobile : doigt vers le bas = page précédente
+      goToPage(activePageRef.current - 1);
+    } else {
+      // Desktop : molette vers le bas = page suivante
+      goToPage(activePageRef.current + 1);
+    }
+  },
 
-      // Desktop
-      onDown(self) {
-        if (self.event?.type === "wheel") {
-          goToPage(activePageRef.current + 1);
-        }
-      },
-
-      onUp(self) {
-        if (self.event?.type === "wheel") {
-          goToPage(activePageRef.current - 1);
-        }
-      },
-
-      // Mobile
-      onPress(self) {
-        if ("clientY" in self.event) {
-          const event = self.event as { clientY: number };
-          touchStartY = event.clientY;
-        }
-      },
-
-      onRelease(self) {
-        if (!("clientY" in self.event)) return;
-
-        const event = self.event as { clientY: number };
-        const delta = touchStartY - event.clientY;
-
-        if (Math.abs(delta) < 40) return;
-
-        if (delta > 0) {
-          // doigt vers le haut = vrai scroll vers le bas = page suivante
-          goToPage(activePageRef.current + 1);
-        } else {
-          // doigt vers le bas = vrai scroll vers le haut = page précédente
-          goToPage(activePageRef.current - 1);
-        }
-      },
-    });
+  onUp: (self) => {
+    if (self.event?.type.startsWith("touch")) {
+      // Mobile : doigt vers le haut = page suivante
+      goToPage(activePageRef.current + 1);
+    } else {
+      // Desktop : molette vers le haut = page précédente
+      goToPage(activePageRef.current - 1);
+    }
+  },
+});
 
     // ✅ Mobile swipe fallback (IMPORTANT)
 
@@ -132,7 +113,7 @@ export default function SectionHomeComponent() {
   return (
     <div className="h-full pt-4 w-full relative overflow-hidden touch-pan-y">
       <div ref={heroWrapperRef} className="h-full flex items-center">
-        <SectionHero activePage={activePage} setActivePage={setActivePage}/>
+        <SectionHero activePage={activePage} />
       </div>
 
       <div className="absolute max-md:hidden bottom-0 left-0">
