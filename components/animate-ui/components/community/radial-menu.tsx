@@ -879,7 +879,7 @@ export function RadialMenu({
             animate={{ scale: 1, opacity: 1 }}
             transition={menuTransition}
             style={{ width: size, height: size }}
-            className="relative rounded-full overflow-hidden bg-white dark:bg-transparent border border-neutral-800/0"
+            className="relative rounded-full overflow-hidden bg-transparent dark:bg-transparent border border-neutral-800/0"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
@@ -917,13 +917,13 @@ export function RadialMenu({
                   >
                     <path
                       d={outerPath}
-                      className={cn("transition-colors duration-300", active ? "fill-yellow-500 stroke-black" : "fill-transparent dark:fill-gray-500/20 stroke-black")}
+                      className={cn("transition-colors duration-300", active ? "fill-yellow-500 stroke-black" : "fill-white/30 dark:fill-gray-500/20 stroke-black/50")}
                     />
                     <path
                       d={wedgePath}
                       className={cn(
                         "transition-all duration-300 stroke-black/20 dark:stroke-white/5",
-                        active ? "fill-yellow-500 stroke-black/30" : "fill-transparent stroke-black/70"
+                        active ? "fill-yellow-500 stroke-black/30" : "fill-white/20 dark:fill-black/20 dark:stroke-gray-500/20 stroke-black/70"
                       )}
                     />
                     <foreignObject x={iconPos.x - 22} y={iconPos.y - 22} width={44} height={44}>
@@ -959,7 +959,7 @@ export function RadialMenu({
                 cx={0}
                 cy={0}
                 r={progressRingRadius}
-                className="fill-none stroke-black/30 dark:stroke-white/5"
+                className="fill-gray-300/50 dark:fill-black/50 stroke-black/30 dark:stroke-white/5"
                 strokeWidth={1}
               />
 

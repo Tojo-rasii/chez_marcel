@@ -5,7 +5,7 @@ export default function ContactForm() {
   return (
     <div className="relative w-full max-w-xl mx-auto my-0">
       {/* Conteneur principal avec effet d'ombre pleine noire décalée */}
-      <div className="bg-white dark:bg-gray-500/20 dark:text-white border border-black p-8 md:p-10 shadow-[20px_20px_0px_0px_#F0B100] flex flex-col gap-8">
+      <div className="bg-white/70 dark:bg-gray-500/20 dark:text-white border border-black/20 p-8 md:p-10 shadow-[20px_20px_0px_0px_#F0B100] flex flex-col gap-8">
 
         <div className="flex justify-between flex-wrap gap-2 items-center">
           <h3 className="text-xl  dark:text-white font-heading font-bold tracking-wider text-black uppercase">
