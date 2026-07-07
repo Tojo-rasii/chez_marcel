@@ -65,14 +65,15 @@ export default function ActionButton({
         <Button
           variant="outline"
           onClick={() => setOpenDevis(true)}
-          className="max-md:w-full max-md:text-wrap max-sm:h-max outline-2 outline-black bg-transparent font-heading max-sm:text-lg font-medium text-lg w-max h-13 text-black px-8 max-md:py-2 cursor-pointer rounded-full"
+           className="max-md:w-full max-md:text-wrap max-sm:h-max border-1 border-black dark:border-white dark:text-white hover:bg-gray-50/90 bg-transparent text-black uppercase w-max max-sm:text-lg h-13 text-md font-medium px-8 max-md:py-2 cursor-pointer rounded-full"
+
         >
           Demander un devis
         </Button>
       <Button
   variant="default"
   onClick={() => setActivePage(5)}
-  className="max-md:w-full max-md:text-wrap max-sm:h-max outline-2 outline-black bg-black text-white w-max max-sm:text-lg h-13 text-lg font-medium font-heading px-8 max-md:py-2 cursor-pointer rounded-full"
+  className="max-md:w-full max-md:text-wrap dark:border-white max-sm:h-max border-1 border-black hover:bg-yellow-500/90 bg-yellow-500 text-black uppercase w-max max-sm:text-lg h-13 text-md font-medium px-8 max-md:py-2 cursor-pointer rounded-full"
 >
   Nous contacter
 </Button>
@@ -144,7 +145,7 @@ export default function ActionButton({
             <Button
               type="submit"
               disabled={loading}
-              className="w-full bg-black text-white rounded-full h-12 font-heading"
+              className="w-full bg-yellow-500 text-black rounded-full h-12 font-semibold uppercase hover:bg-yellow-500/90 cursor-pointer"
             >
               {loading ? "Envoi..." : "Envoyer la demande"}
             </Button>

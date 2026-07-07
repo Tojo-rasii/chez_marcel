@@ -23,16 +23,16 @@ export default function HeroPagination({ activePage, setActivePage }: any) {
 
                 }}
                 className={`
-                  p-0 bg-none font-heading ring-0
+                  p-0 bg-none font-heading ring-0 offset-0 outline-0
                   
-                  ${activePage === page ? "opacity-100 font-bold" : "opacity-50"}
+                  ${activePage === page ? "opacity-100 font-bold text-yellow" : "opacity-50"}
                 `}
               >
                 {page.toString().padStart(2, "0")}
               </PaginationLink>
 
               {activePage === page && (
-                <div className="h-[2px] m-auto w-10 bg-black" />
+                <div className="h-[2px] m-auto w-10 bg-yellow-500" />
               )}
             </PaginationItem>
           ))}

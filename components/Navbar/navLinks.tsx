@@ -1,20 +1,42 @@
 "use client";
 
-import { Globe, TextAlignStart, Check } from "lucide-react";
+import { Globe, TextAlignStart, MoonStar } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/lightswind/dropdown-menu";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/lightswind/radio-group";
 import { Switch } from "@/components/lightswind/switch";
-import { MoonStar } from "lucide-react";
 
 export default function NavLinks() {
   const [darkMode, setDarkMode] = useState(false);
   const [language, setLanguage] = useState<"fr" | "mg">("fr");
+
+  // Charger le thème sauvegardé
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "dark") {
+      setDarkMode(true);
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+
+  // Changer le thème
+  const handleDarkMode = (checked: boolean) => {
+    setDarkMode(checked);
+
+    if (checked) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  };
+
 
   const nav = [
     {
@@ -31,8 +53,10 @@ export default function NavLinks() {
     },
   ];
 
+
   return (
-    <div className="flex text-black/80 z-99 items-center justify-center gap-5">
+    <div className="flex text-black/80 dark:text-white z-99 items-center justify-center gap-5">
+
       <ul className="flex items-center max-md:hidden gap-7 font-heading text-sm">
         {nav.map((item, index) => (
           <li key={index}>
@@ -43,97 +67,99 @@ export default function NavLinks() {
         ))}
       </ul>
 
+
       <div className="flex items-center gap-5 ms-10">
+
+        {/* Language */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button className="outline-none">
               <Globe className="size-5 cursor-pointer hover:text-yellow-500 transition-colors" />
             </button>
           </DropdownMenuTrigger>
+
           <DropdownMenuContent
             align="end"
-            className="w-40 rounded-0 border-black/30 p-2"
+            className="w-40 rounded-0 border-black/30 p-2 dark:bg-neutral-900"
           >
+
             <RadioGroup
               value={language}
-              onValueChange={(value) => setLanguage(value as "fr" | "mg")}
-              className="space-y-1"
+              onValueChange={(value) =>
+                setLanguage(value as "fr" | "mg")
+              }
             >
-              <label
-                htmlFor="fr"
-                className="flex items-center gap-3 rounded-lg px-2 py-2 cursor-pointer hover:bg-muted transition-colors"
-              >
 
+              <label className="flex items-center gap-3 rounded-lg px-2 py-2 cursor-pointer hover:bg-muted">
 
                 <span className="fi fi-fr h-4 w-6 shadow-sm"></span>
 
-                <span className="flex-1 font-medium">Français</span>
-                <RadioGroupItem
-                  id="fr"
-                  value="fr"
-                  className="
-focus:outline-none
-focus-visible:outline-none
-focus-visible:ring-0
-focus-visible:ring-offset-0
-data-[state=checked]:border-primary
-ring-0
-"
-                />
+                <span className="flex-1 font-medium">
+                  Français
+                </span>
+
+                <RadioGroupItem value="fr" />
+
               </label>
 
-              <label
-                htmlFor="mg"
-                className="flex items-center gap-3 rounded-lg px-2 py-2 cursor-pointer hover:bg-muted transition-colors"
-              >
 
+              <label className="flex items-center gap-3 rounded-lg px-2 py-2 cursor-pointer hover:bg-muted">
 
                 <span className="fi fi-mg h-4 w-6 shadow-sm"></span>
 
-                <span className="flex-1 font-medium">Malagasy</span>
-                <RadioGroupItem
-                  id="mg"
-                  value="mg"
-                  className="
-focus:outline-none
-focus-visible:outline-none
-focus-visible:ring-0
-focus-visible:ring-offset-0
-data-[state=checked]:border-primary
-ring-0
-"
-                />
+                <span className="flex-1 font-medium">
+                  Malagasy
+                </span>
+
+                <RadioGroupItem value="mg" />
+
               </label>
+
             </RadioGroup>
+
           </DropdownMenuContent>
         </DropdownMenu>
 
+
+        {/* Dark mode */}
         <DropdownMenu>
+
           <DropdownMenuTrigger asChild>
             <button className="outline-none">
               <TextAlignStart className="size-5 cursor-pointer hover:text-yellow-500 transition-colors" />
             </button>
           </DropdownMenuTrigger>
 
+
           <DropdownMenuContent
             align="end"
-            className="w-56 rounded-xl scale-95 border-black/30 p-2"
+            className="w-56 rounded-xs border-black/30 p-2 dark:bg-neutral-900"
           >
+
             <div className="flex items-center justify-between rounded-lg px-3 py-2">
+
               <div className="flex items-center gap-3">
                 <MoonStar className="size-4" />
-                <span className="font-medium">Dark mode</span>
+
+                <span className="font-medium">
+                  Dark mode
+                </span>
               </div>
+
 
               <Switch
                 checked={darkMode}
-                onCheckedChange={setDarkMode}
+                onCheckedChange={handleDarkMode}
               />
 
             </div>
+
           </DropdownMenuContent>
+
         </DropdownMenu>
+
       </div>
+
     </div>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Marcellus, Marcellus_SC, Assistant } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import Cursor from "@/components/cursor";
 
 const marcellus = Marcellus({
   subsets: ["latin"],
@@ -41,6 +42,7 @@ export default function RootLayout({
         assistant.variable
       )}
     >
+      {/* <Cursor /> */}
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

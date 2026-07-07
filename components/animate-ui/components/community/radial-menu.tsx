@@ -80,6 +80,7 @@ type RadialMenuProps = {
   outerRingWidth?: number;
   /** Numéro de la page/écran courant (utilisé pour afficher les indicateurs prev/next latéraux) */
   activePage: number | string;
+  setActivePage: any;
   onSelect?: (item: MenuItem) => void;
 };
 
@@ -203,7 +204,7 @@ function ModalShell({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-999 flex items-center justify-center p-4 bg-black/30 backdrop-blur-xs"
+      className="fixed inset-0 z-999 flex items-center justify-center p-4 bg-black/20 backdrop-blur-xs"
       onClick={onClose}
       role="presentation"
     >
@@ -216,7 +217,7 @@ function ModalShell({
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="w-full max-w-2xl z-999 max-h-[90vh] overflow-hidden flex flex-col bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xl"
+        className="w-full max-w-2xl z-999 max-h-[95vh] overflow-hidden flex flex-col bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xl"
       >
         <div className="flex items-start justify-between gap-4 px-5 pt-5 pb-4 border-b border-neutral-100 dark:border-neutral-800">
           <div>
@@ -450,7 +451,7 @@ function CalendarModal({
                     "aspect-square border border-black/5 rounded-full hover:border-1 hover:border-black/20  font-heading text-xs font-semibold transition-colors",
                     isPast && "text-neutral-300 border-black/5 dark:text-neutral-700 cursor-not-allowed",
                     !isPast && !isSelected && "text-neutral-700 dark:text-neutral-300 hover:bg-yellow-50 dark:hover:bg-yellow-950/40",
-                    isSelected && "bg-black text-white"
+                    isSelected && "bg-yellow-500 text-black"
                   )}
                 >
                   {day.getDate()}
@@ -473,8 +474,8 @@ function CalendarModal({
                     className={cn(
                       "py-2 rounded-lg text-xs font-medium border transition-colors",
                       selectedTime === time
-                        ? "bg-transparent border-black text-neutral-900"
-                        : "border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-300 hover:border-yellow-400"
+                        ? "bg-transparent border-yellow-500 border-2 text-neutral-900"
+                        : "border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-300 hover:border-black/50"
                     )}
                   >
                     {time}
@@ -498,7 +499,7 @@ function CalendarModal({
           <button
             onClick={handleConfirm}
             disabled={!selectedDay || !selectedTime}
-            className="w-full py-2.5 px-6 mx-auto rounded-full bg-black text-white uppercase text-[0.8em] font-semibold disabled:active:scale-[1] disabled:hover:bg-black disabled:opacity-30 disabled:cursor-not-allowed hover:bg-yellow-400 active:scale-[0.98] transition-all"
+            className="w-full py-2.5 px-6 mx-auto rounded-full bg-yellow-500/90 text-black uppercase text-[0.8em] font-semibold disabled:active:scale-[1] disabled:hover:bg-black disabled:opacity-30 disabled:cursor-not-allowed hover:bg-yellow-500 cursor-pointer active:scale-[0.98] transition-all"
           >
             Confirmer la réservation
           </button>
@@ -610,7 +611,7 @@ function ThumbnailRail({
             aria-label={item.label}
             className={cn(
               "relative shrink-0 w-50 h-50  rounded-full overflow-hidden transition-all duration-300",
-              active ? " ring-2 ring-black ring-offset-2 ring-offset-white dark:ring-offset-neutral-950" : "hidden size-9 opacity-70 hover:opacity-100"
+              active ? " ring-3 ring-yellow-500 ring-offset-2 ring-offset-white dark:ring-offset-neutral-950" : "hidden size-9 opacity-70 hover:opacity-100"
             )}
           >
             <img
@@ -644,6 +645,7 @@ export function RadialMenu({
   outerRingWidth = 12,
   onSelect,
   activePage,
+  setActivePage
 }: RadialMenuProps) {
   const itemCount = menuItems.length;
 
@@ -834,12 +836,12 @@ export function RadialMenu({
                   </span> */}
                   <h3 className="font-heading uppercase font-semibold text-md max-md:text-lg max-md:text-center flex items-center gap-3">
 
-                    <Separator className="w-5 h-0.5 bg-black/50" /><span>{activeItem?.label}</span>
+                    <Separator className="w-5 h-0.5 bg-yellow-500" /><span>{activeItem?.label}</span>
                   </h3>
-                  <h2 className="text-4xl font-extrabold font-heading text-neutral-900 dark:text-neutral-50 tracking-tight">
+                  <h2 className="text-4xl p-1 font-extrabold font-heading text-yellow dark:text-neutral-50 tracking-tight">
                     {activeItem?.title}
                   </h2>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed balance">
+                  <p className="text-sm  text-neutral-600 dark:text-neutral-400 leading-relaxed balance">
                     {activeItem?.description}
                   </p>
                 </motion.div>
@@ -850,7 +852,7 @@ export function RadialMenu({
       )}
 
       {/* ================= COLONNE CENTRALE : LE MENU RADIAL ================= */}
-      <div className={`${activePage !== 1 ? "" : ""}  grid relative items-center justify-center bg-transparent select-none w-full`}>
+      <div className={`${activePage !== 1 ? "items-end justify-end  self-end" : ""}  grid relative items-center justify-center bg-transparent select-none w-full`}>
 
 
 
@@ -877,7 +879,7 @@ export function RadialMenu({
             animate={{ scale: 1, opacity: 1 }}
             transition={menuTransition}
             style={{ width: size, height: size }}
-            className="relative rounded-full overflow-hidden bg-white border border-neutral-800/60"
+            className="relative rounded-full overflow-hidden bg-white dark:bg-transparent border border-neutral-800/0"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
@@ -901,7 +903,10 @@ export function RadialMenu({
                     aria-current={active}
                     onMouseEnter={() => handleHover(index)}
                     onFocus={() => handleHover(index)}
-                    onClick={() => handlePick(item)}
+                    onClick={() => {
+                      handlePick(item);
+                     setActivePage(2)
+                    }}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
@@ -912,13 +917,13 @@ export function RadialMenu({
                   >
                     <path
                       d={outerPath}
-                      className={cn("transition-colors duration-300", active ? "fill-black" : "fill-white stroke-black/70")}
+                      className={cn("transition-colors duration-300", active ? "fill-yellow-500 stroke-black" : "fill-transparent dark:fill-gray-500/20 stroke-black")}
                     />
                     <path
                       d={wedgePath}
                       className={cn(
                         "transition-all duration-300 stroke-black/20 dark:stroke-white/5",
-                        active ? "fill-black stroke-black/30" : "fill-transparent stroke-black/70"
+                        active ? "fill-yellow-500 stroke-black/30" : "fill-transparent stroke-black/70"
                       )}
                     />
                     <foreignObject x={iconPos.x - 22} y={iconPos.y - 22} width={44} height={44}>
@@ -928,7 +933,7 @@ export function RadialMenu({
                           className={cn(
                             "flex items-center justify-center rounded-full transition-all duration-300 border",
                             active
-                              ? "size-9 bg-transparent/15 border-white scale-110"
+                              ? "size-9 bg-transparent/15 border-yellow scale-100"
                               : "size-8 bg-white/5 border-white/10 group-hover:border-white/30"
                           )}
                         >
@@ -937,7 +942,7 @@ export function RadialMenu({
                             strokeWidth={active ? 2.25 : 1.75}
                             className={cn(
                               "transition-colors duration-300",
-                              active ? "text-white" : "text-black/70"
+                              active ? "text-yellow" : "text-black/70 dark:text-white/80"
                             )}
                           />
                         </div>
@@ -963,7 +968,7 @@ export function RadialMenu({
                   cx={0}
                   cy={0}
                   r={progressRingRadius}
-                  className="fill-none stroke-black transition-[stroke-dashoffset] duration-75 ease-linear"
+                  className="fill-none stroke-yellow-500 transition-[stroke-dashoffset] duration-75 ease-linear"
                   strokeWidth={3}
                   strokeDasharray={circumference}
                   strokeDashoffset={strokeDashoffset}
@@ -980,7 +985,7 @@ export function RadialMenu({
                 className="pointer-events-none"
               >
                 <div className="flex flex-col h-full w-full items-center justify-center text-center p-4">
-                  <div className="mb-2 flex items-center justify-center size-14 rounded-full bg-black dark:bg-yellow-950/40 border border-black dark:border-yellow-900 text-white dark:text-yellow-400 transition-transform duration-300">
+                  <div className="mb-2 flex items-center justify-center size-14 rounded-full bg-yellow-500 dark:bg-yellow-950/40 border border-black dark:border-yellow-900 text-black dark:text-yellow-400 transition-transform duration-300">
                     {ActiveIcon && <ActiveIcon size={28} strokeWidth={1.75} />}
                   </div>
                   <span className="text-lg font-heading font-bold dark:text-neutral-100 tracking-tight">
@@ -1010,7 +1015,7 @@ export function RadialMenu({
       {/* ================= COLONNE DROITE : LES ACTION BUTTONS (CLIC) ================= */}
       {/* Masquée en mode minimal (page 1) : pas d'actions déclenchables ici */}
       {!isMinimal && selectedItem && (
-        <div className="min-h-full max-md:bg-white max-md:w-full  max-md:right-0  max-md:p-2 w-70 absolute right-9 z-999 flex flex-col justify-center">
+        <div className="min-h-full max-md:bg-white dark:max-md:bg-[#0D0D0D] max-md:w-full  max-md:right-0  max-md:p-2 w-70 absolute right-9 z-999 flex flex-col justify-center">
           <AnimatePresence mode="wait">
             {selectedItem ? (
               <motion.div
@@ -1040,7 +1045,7 @@ export function RadialMenu({
 
                 <button
                   onClick={() => setActiveModal("history")}
-                  className="w-full py-3 uppercase px-4 flex items-center justify-center gap-2 bg-black/90 hover:bg-black active:scale-[0.98] text-white font-semibold text-xs rounded-full transition-all  cursor-pointer"
+                  className="w-full py-3 border uppercase px-4 flex items-center justify-center gap-2 bg-yellow-500/90 text-black hover:bg-yellow-500 active:scale-[0.98]  font-semibold text-xs rounded-full transition-all  cursor-pointer"
                 >
                   <ShoppingBag size={16} />
                   Commande

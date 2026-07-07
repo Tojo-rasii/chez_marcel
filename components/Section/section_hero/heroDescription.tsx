@@ -3,15 +3,15 @@ import Image from "next/image";
 
 export default function HeroDescription({ page }: any) {
   return (
-    <div className="text-black/80 bg-transparent">
+    <div className="text-black/80 dark:text-white bg-transparent">
       <div className="flex flex-col gap-5">
         <h3 className="font-heading text-xl font-semibold max-md:text-lg flex items-center gap-3">
-          <Separator className="w-8 h-0.5 max-md:hidden bg-black/50" /><span>Bienvenue chez Marcel Click & Services</span>
+          <Separator className="w-8 h-0.5 max-md:hidden bg-yellow-500/50" /><span>Bienvenue chez Marcel Click & Services</span>
         </h3>
         <h1 className="font-heading uppercase max-md:text-xl text-2xl leading-relaxed font-extrabold md:text-4xl">
-          Votre guichet unique pour tous vos besoins quotidiens
+          Votre guichet unique pour tous <span className="bg-yellow-500">vos besoins quotidiens</span> 
         </h1>
-        <p className="text-black/70  font-semibold leading-relaxed ">
+        <p className="text-black/70 dark:text-white/70 font-500 leading-relaxed ">
           <span className="max-md:line-clamp-3">
             Nous proposons un ensemble de prestations de confiance (Mobile Money, espace multimédia, salon de coiffure pour hommes, etc.), le tout sous un même toit.
             <br />

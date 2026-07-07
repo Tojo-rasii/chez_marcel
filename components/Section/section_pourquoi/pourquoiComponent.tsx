@@ -6,7 +6,7 @@ import PourquoiCard from "./pourquoiCard";
 
 export default function PourquoiComponent() {
     return (
-        <div className="bg-white p-5 w-full flex flex-col gap-8 max-md:justify-start justify-center h-full">
+        <div className="bg-transparent p-5 w-full flex flex-col gap-8 max-md:justify-start justify-center h-full">
             <div className="flex justify-center">
                 <PourquoiTitle />
             </div>

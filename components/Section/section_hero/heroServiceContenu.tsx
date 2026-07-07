@@ -180,15 +180,17 @@ const MENU_ITEMS: MenuItem[] = [
 ];
 
 type HeroServiceContenuProps = {
+  setActivePage: any;
   activePage: any;
   page: any;
 };
 
-export default function HeroServiceContenu({ activePage, page }: HeroServiceContenuProps) {
+export default function HeroServiceContenu({ activePage,setActivePage, page }: HeroServiceContenuProps) {
   return (
     <div className="w-full max-md:absolute max-md:p-0  max-md:scale-100 flex items-center justify-center">
       <RadialMenu
         activePage={page}
+        setActivePage={setActivePage}
         menuItems={MENU_ITEMS}
         onSelect={(item) => console.log("Sélectionné :", item.label)}
       />

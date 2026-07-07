@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 
 export default function FooterComponent() {
     return (
-        <div className="flex flex-col max-md:justify-start justify-between h-full gap-4">
+        <div className="flex flex-col dark:text-white max-md:justify-start justify-between h-full gap-4">
             <div className="grid grid-cols-2 max-md:grid-cols-1 max-md:pb-10  border-b-1 border-black h-full max-md:h-full">
                 <div className="flex flex-col justify-between max-md:justify-between max-md:gap-2 gap-4">
                     <div className="flex flex-col max-md:gap-2 gap-4">

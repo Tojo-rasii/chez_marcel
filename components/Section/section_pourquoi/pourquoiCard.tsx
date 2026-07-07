@@ -29,16 +29,16 @@ export default function PourquoiCard() {
                     cardData.map((card, index) => (
 
                         <div key={index} className="flex max-md:items-start max-md:w-full max-md:flex-row  relative flex-col items-center max-md:items-start gap-4">
-                            <div className="number border-3 border-white outline-3 outline-black min-w-18 min-h-18 max-md:min-w-12  max-md:min-h-12  flex items-center justify-center max-md:m-0 m-auto rounded-full bg-black ">
-                                <span className="font-normal font-heading max-md:text-xl text-3xl text-white" >
+                            <div className="number border-3 border-white dark:outline-yellow-500/20 dark:border-transparent outline-3 outline-black min-w-18 min-h-18 max-md:min-w-12  max-md:min-h-12  flex items-center justify-center max-md:m-0 m-auto rounded-full bg-yellow-500 ">
+                                <span className="font-normal font-heading max-md:text-xl text-3xl text-black" >
                                     {card.number}
                                 </span>
                             </div>
                             <div className="desc ax-md:w-full flex flex-col gap-2">
                                 <div className="title">
-                                    <h1 className="text-2xl text-black/80 font-semibold max-md:text-xl font-heading max-md:text-start text-center">{card.title}</h1>
+                                    <h1 className="text-2xl text-black/80 dark:text-white/90 font-semibold max-md:text-xl font-heading max-md:text-start text-center">{card.title}</h1>
                                 </div>
-                                <div className="desc text-center max-sm:line-clamp-2 max-md:text-start">
+                                <div className="desc text-center dark:text-white/70 max-sm:line-clamp-2 max-md:text-start">
                                     <p>{card.desc}</p>
                                 </div>
                             </div>

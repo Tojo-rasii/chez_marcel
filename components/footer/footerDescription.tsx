@@ -5,7 +5,7 @@ export default function FooterDescription() {
         <div>
                <h1 className="font-heading text-4xl font-semibold max-md:text-3xl text-center flex items-center gap-2">
 
-            Un clic, et vous êtes servi.
+            Un clic, et <span className="bg-yellow-500">vous êtes servi.</span>
         </h1>
     </div>
   );

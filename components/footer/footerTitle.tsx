@@ -5,7 +5,7 @@ export default function FooterTitle() {
   return (
 <div>
       <h3 className="font-heading font-semibold text-xl max-md:text-lg max-md:text-center flex items-center gap-3">
-            <Separator className="w-8 h-0.5 max-md:w-5 bg-black/50"/><span>Chez Marcel Click & Services</span> 
+            <Separator className="w-8 h-0.5 max-md:w-5 bg-yellow-500"/><span>Chez Marcel Click & Services</span> 
         </h3>
     </div>
   );

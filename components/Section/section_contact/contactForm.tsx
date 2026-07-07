@@ -5,10 +5,10 @@ export default function ContactForm() {
   return (
     <div className="relative w-full max-w-xl mx-auto my-0">
       {/* Conteneur principal avec effet d'ombre pleine noire décalée */}
-      <div className="bg-white border border-black p-8 md:p-10 shadow-[20px_20px_0px_0px_#1a1a1a] flex flex-col gap-8">
+      <div className="bg-white dark:bg-gray-500/20 dark:text-white border border-black p-8 md:p-10 shadow-[20px_20px_0px_0px_#F0B100] flex flex-col gap-8">
 
         <div className="flex justify-between flex-wrap gap-2 items-center">
-          <h3 className="text-xl font-heading font-bold tracking-wider text-black uppercase">
+          <h3 className="text-xl  dark:text-white font-heading font-bold tracking-wider text-black uppercase">
             Laissez-nous un message
           </h3>
 
@@ -24,7 +24,7 @@ export default function ContactForm() {
               <input
                 type="text"
                 placeholder="Nom"
-                className="w-full border-b border-black bg-transparent pb-2 text-black placeholder-black/80 focus:outline-none rounded-none text-base"
+                className="w-full dark:border-b-white dark:text-white border-b border-black bg-transparent pb-2 text-black placeholder-black/80  dark:placeholder-white/80  focus:outline-none rounded-none text-base"
                 required
               />
             </div>
@@ -32,7 +32,7 @@ export default function ContactForm() {
               <input
                 type="text"
                 placeholder="Prénom"
-                className="w-full border-b border-black bg-transparent pb-2 text-black placeholder-black/80 focus:outline-none rounded-none text-base"
+                className="w-full dark:border-b-white dark:text-white border-b border-black bg-transparent pb-2 text-black placeholder-black/80  dark:placeholder-white/80  focus:outline-none rounded-none text-base"
                 required
               />
             </div>
@@ -43,7 +43,7 @@ export default function ContactForm() {
             <input
               type="email"
               placeholder="Email"
-              className="w-full border-b border-black bg-transparent pb-2 text-black placeholder-black/80 focus:outline-none rounded-none text-base"
+              className="w-full dark:border-b-white dark:text-white border-b border-black bg-transparent pb-2 text-black placeholder-black/80  dark:placeholder-white/80  focus:outline-none rounded-none text-base"
               required
             />
           </div>
@@ -53,7 +53,7 @@ export default function ContactForm() {
             <input
               type="text"
               placeholder="Messages"
-              className="w-full border-b border-black bg-transparent pb-2 text-black placeholder-black/80 focus:outline-none rounded-none text-base"
+              className="w-full dark:border-b-white dark:text-white border-b border-black bg-transparent pb-2 text-black placeholder-black/80 dark:placeholder-white/80 focus:outline-none rounded-none text-base"
               required
             />
           </div>
@@ -62,7 +62,7 @@ export default function ContactForm() {
           <div className="flex justify-end mt-2">
             <Button
               type="submit"
-              className="bg-[#1a1a1a] hover:bg-black text-white font-medium tracking-widest uppercase px-16 py-7 cursor-pointer w-full rounded-full text-md transition-colors"
+              className="bg-yellow-500 border border-black hover:bg-yellow-500/95 text-black font-medium uppercase px-16 py-7 cursor-pointer w-full rounded-full text-md transition-colors"
             >
               ENVOYER
             </Button>
