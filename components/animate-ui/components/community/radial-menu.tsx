@@ -405,7 +405,7 @@ function CalendarModal({
 
 
 
-      <div className="grid grid-cols-[1fr_0.8fr] gap-8">
+      <div className="grid grid-cols-[1fr_0.8fr] max-md:grid-cols-1 gap-8">
         <div className="flex flex-col border p-3 pb-0.5 border-gray-100">
           <div className="flex items-center  justify-between mb-3">
             <button
@@ -789,6 +789,7 @@ export function RadialMenu({
   }
 
   return (
+     <>
     <div className={`relative isolate ${!isMinimal && "grid grid-cols-3 max-md:grid-cols-1"} w-full mx-auto overflow-hidden`}>
       {/* ================= ARRIÈRE-PLAN DYNAMIQUE : chaque service illustre le fond à tour de rôle ================= */}
       {/* Masqué en mode minimal (page 1) : il ne doit rester que la roue + le chargement, rien d'autre en fond */}
@@ -1104,5 +1105,6 @@ export function RadialMenu({
       }
 
     </div >
+    </>
   );
 }
