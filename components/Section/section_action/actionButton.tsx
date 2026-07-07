@@ -61,14 +61,14 @@ export default function ActionButton() {
         <Button
           variant="outline"
           onClick={() => setOpenDevis(true)}
-          className="max-md:w-full max-md:text-wrap max-sm:h-max outline-2 outline-black bg-transparent font-heading max-sm:text-lg font-medium text-lg w-max h-13 text-black px-8 cursor-pointer rounded-full"
+          className="max-md:w-full max-md:text-wrap max-sm:h-max outline-2 outline-black bg-transparent font-heading max-sm:text-lg font-medium text-lg w-max h-13 text-black px-8 max-md:py-2 cursor-pointer rounded-full"
         >
           Demander un devis
         </Button>
         <Button
           variant="default"
           onClick={() => setOpenContact(true)}
-          className="max-md:w-full max-md:text-wrap max-sm:h-max outline-2 outline-black bg-black text-white w-max max-sm:text-lg h-13 text-lg font-medium font-heading px-8 cursor-pointer rounded-full"
+          className="max-md:w-full max-md:text-wrap max-sm:h-max outline-2 outline-black bg-black text-white w-max max-sm:text-lg h-13 text-lg font-medium font-heading px-8 max-md:py-2  cursor-pointer rounded-full"
         >
           Nous contacter
         </Button>

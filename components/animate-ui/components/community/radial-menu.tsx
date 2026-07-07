@@ -597,7 +597,7 @@ function ThumbnailRail({
   onSelect: (item: MenuItem) => void;
 }) {
   return (
-    <div className="flex items-center justify-end h-full gap-4 mt-6">
+    <div className="flex max-md:absolute items-center justify-end h-full gap-4 mt-6">
       <Separator className="w-7" />
       {items.map((item, index) => {
         const active = index === activeIndex;
@@ -850,14 +850,14 @@ export function RadialMenu({
       )}
 
       {/* ================= COLONNE CENTRALE : LE MENU RADIAL ================= */}
-      <div className={`${activePage !== 1 ? "" : ""} grid relative items-center justify-center bg-transparent select-none w-full`}>
+      <div className={`${activePage !== 1 ? "" : ""}  grid relative items-center justify-center bg-transparent select-none w-full`}>
 
 
 
         {/* ================= COLONNE CENTRALE : LE MENU RADIAL ================= */}
         <div
           className={cn(
-            "flex relative items-center justify-center select-none w-full",
+            "flex relative items-center max-md:scale-80 justify-center select-none w-full",
             isMinimal ? "lg:col-span-6" : "lg:col-span-6"
           )}
         >
@@ -1074,7 +1074,7 @@ export function RadialMenu({
       )}
 
       {!isMinimal && (
-        <div className="px-4 max-md:hidden pb-8 -mt-2">
+        <div className="px-4 max-md:hidden top-0 pb-8 -mt-2">
           <ThumbnailRail items={menuItems} activeIndex={activeIndex} onHover={handleHover} onSelect={handlePick} />
         </div>
       )}
