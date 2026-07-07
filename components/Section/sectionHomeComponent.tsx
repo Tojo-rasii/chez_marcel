@@ -132,7 +132,7 @@ export default function SectionHomeComponent() {
   return (
     <div className="h-full pt-4 w-full relative overflow-hidden touch-pan-y">
       <div ref={heroWrapperRef} className="h-full flex items-center">
-        <SectionHero activePage={activePage} />
+        <SectionHero activePage={activePage} setActivePage={setActivePage}/>
       </div>
 
       <div className="absolute max-md:hidden bottom-0 left-0">

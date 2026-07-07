@@ -10,7 +10,13 @@ import PourquoiComponent from "../section_pourquoi/pourquoiComponent";
 import HeroDescription from "./heroDescription";
 import HeroServiceContenu from "./heroServiceContenu";
 
-export default function SectionHero({ activePage }: any) {
+export default function SectionHero({
+  activePage,
+  setActivePage,
+}: {
+  activePage: number;
+  setActivePage: (page: number) => void;
+}) {
   const gridRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -61,7 +67,7 @@ export default function SectionHero({ activePage }: any) {
         )}
 
         {activePage !== 1 && activePage !== 2 && activePage !== 3 && activePage !== 5 && activePage !== 6 && (
-          <ActionComponent />
+          <ActionComponent setActivePage={setActivePage} />
         )}
 
         {activePage !== 1 && activePage !== 2 && activePage !== 3 && activePage !== 4 && activePage !== 6 && (
