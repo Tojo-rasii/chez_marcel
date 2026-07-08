@@ -3,6 +3,7 @@ import NavbarUi from "./Navbar/navbarUi";
 import SectionHomeComponent from "./Section/sectionHomeComponent";
 
 export default function HomeComponent( setOpenDevis: (value: boolean) => void) {
+  
   return (
     <div className="relative h-screen overflow-hidden dark:bg-black/20 dark:text-white">
       {/* Background */}

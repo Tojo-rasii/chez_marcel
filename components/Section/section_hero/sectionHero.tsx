@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef,useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import FooterComponent from "@/components/footer/footerComponent";
@@ -12,12 +12,14 @@ import HeroServiceContenu from "./heroServiceContenu";
 
 export default function SectionHero({
   activePage,
+  openDevis,
   setActivePage,
   setOpenDevis
 }: {
+    openDevis: any;
   activePage: number;
   setActivePage: (page: number) => void;
- setOpenDevis: (value: boolean) => void;
+  setOpenDevis: any;
 }) {
   const gridRef = useRef<HTMLDivElement>(null);
 
@@ -69,7 +71,11 @@ export default function SectionHero({
         )}
 
         {activePage !== 1 && activePage !== 2 && activePage !== 3 && activePage !== 5 && activePage !== 6 && (
-          <ActionComponent setActivePage={setActivePage} />
+          <ActionComponent
+    setActivePage={setActivePage}
+    openDevis={openDevis}
+    setOpenDevis={setOpenDevis}
+/>
         )}
 
         {activePage !== 1 && activePage !== 2 && activePage !== 3 && activePage !== 4 && activePage !== 6 && (

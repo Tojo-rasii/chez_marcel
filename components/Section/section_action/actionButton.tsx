@@ -21,11 +21,15 @@ import {
 } from "@/components/ui/select";
 
 export default function ActionButton({
-  setActivePage,
-}: {
-  setActivePage: (page: number) => void;
-}) {
-  const [openDevis, setOpenDevis] = useState(false);
+    setActivePage,
+    openDevis,
+    setOpenDevis,
+}:{
+    setActivePage:(page:number)=>void;
+    openDevis:boolean;
+    setOpenDevis:any;
+}){
+  // const [openDevis, setOpenDevis] = useState(false);
   const [openContact, setOpenContact] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -95,23 +99,23 @@ export default function ActionButton({
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="devis-nom">Nom complet</Label>
-                <Input className="border-b-1 bg-transparent border-b-black rounded-none" id="devis-nom" name="nom" required />
+                <Input className="border-b-1 bg-transparent border-b-black dark:border-b-white rounded-none" id="devis-nom" name="nom" required />
               </div>
               <div>
                 <Label htmlFor="devis-email">Email</Label>
-                <Input className="border-b-1 bg-transparent border-b-black rounded-none" id="devis-email" name="email" type="email" required />
+                <Input className="border-b-1 bg-transparent border-b-black dark:border-b-white rounded-none" id="devis-email" name="email" type="email" required />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="devis-telephone">Téléphone</Label>
-                <Input className="border-b-1 bg-transparent border-b-black rounded-none" id="devis-telephone" name="telephone" type="tel" />
+                <Input className="border-b-1 bg-transparent border-b-black dark:border-b-white rounded-none" id="devis-telephone" name="telephone" type="tel" />
               </div>
               <div className="w-full">
                 <Label htmlFor="devis-service">Type de service</Label>
                 <Select name="service" >
-                  <SelectTrigger id="devis-service" className="border-b-1  bg-transparent border-b-black rounded-none w-full">
+                  <SelectTrigger id="devis-service" className="border-b-1  bg-transparent border-b-black dark:border-b-white rounded-none w-full">
                     <SelectValue placeholder="Choisir..." className="w-full"/>
                   </SelectTrigger>
                   <SelectContent>
@@ -127,7 +131,7 @@ export default function ActionButton({
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="devis-arrivee">Date </Label>
-                <Input className="border-b-1 bg-transparent border-b-black rounded-none" id="devis-arrivee" name="dateArrivee" type="date" />
+                <Input className="border-b-1 bg-transparent border-b-black dark:border-b-white rounded-none" id="devis-arrivee" name="dateArrivee" type="date" />
               </div>
             </div>
 
@@ -135,7 +139,7 @@ export default function ActionButton({
               <Label htmlFor="devis-message">Message</Label>
               <Textarea
                 id="devis-message"
-                className="border-b-1 bg-transparent border-b-black rounded-none"
+                className="border-b-1 bg-transparent border-b-black dark:border-b-white rounded-none"
                 name="message"
                 placeholder="Précisez votre besoin..."
                 rows={4}

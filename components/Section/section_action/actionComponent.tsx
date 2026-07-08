@@ -7,9 +7,13 @@ import ActionButton from "./actionButton";
 
 
 export default function ActionComponent({
+  openDevis,
   setActivePage,
+  setOpenDevis
 }: {
+  openDevis:boolean;
   setActivePage: (page: number) => void;
+  setOpenDevis: (value: number) => void;
 }) {
   return (
     <div className="bg-transparent p-5 w-full flex flex-col gap-8 max-md:gap-4 justify-center h-full">
@@ -22,7 +26,7 @@ export default function ActionComponent({
       </div>
 
       <div className="flex justify-center">
-        <ActionButton setActivePage={setActivePage} />
+        <ActionButton openDevis={openDevis} setActivePage={setActivePage} setOpenDevis={setOpenDevis} />
       </div>
     </div>
   );

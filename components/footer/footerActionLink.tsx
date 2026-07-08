@@ -15,7 +15,7 @@ export default function FooterActionLink({
 
       <ul className="flex flex-col max-md:flex-row max-md:flex-wrap max-md:gap-2 max-md:mt-0 mt-4 text-lg gap-3">
         <li
-          onClick={() => {setActivePage(4), onOpenDevis}}
+          onClick={() => {setActivePage(4); onOpenDevis()}}
           className="cursor-pointer hover:text-yellow-500"
         >
           Demander un devis
