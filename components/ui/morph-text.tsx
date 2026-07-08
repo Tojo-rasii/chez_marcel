@@ -199,6 +199,7 @@ export function MorphText({
 
         <Button
           type="submit"
+           onClick={onNext}
           className="bg-yellow-500 max-md:text-sm hover:gap-4 transition flex items-center gap-3 w-max  border border-black hover:bg-yellow-500/95 text-black font-semibold uppercase px-8 py-5 cursor-pointer mx-auto flex items-center justify-center rounded-full text-md transition-colors"
         >
           Commencez <ArrowRightIcon className="size-5"/>
