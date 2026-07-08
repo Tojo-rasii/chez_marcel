@@ -1,3 +1,4 @@
+import { MyHero } from "@/components/onBoarding/myHero";
 import { Button } from "@/components/ui/button";
 import { Mouse } from "lucide-react";
 
