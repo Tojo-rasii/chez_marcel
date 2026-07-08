@@ -2,7 +2,7 @@ import Image from "next/image";
 import NavbarUi from "./Navbar/navbarUi";
 import SectionHomeComponent from "./Section/sectionHomeComponent";
 
-export default function HomeComponent() {
+export default function HomeComponent( setOpenDevis: (value: boolean) => void) {
   return (
     <div className="relative h-screen overflow-hidden dark:bg-black/20 dark:text-white">
       {/* Background */}
@@ -16,7 +16,7 @@ export default function HomeComponent() {
       </div>
 
       <NavbarUi />
-      <SectionHomeComponent />
+      <SectionHomeComponent  setOpenDevis={setOpenDevis} />
     </div>
   );
 }

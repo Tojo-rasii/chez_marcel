@@ -8,7 +8,13 @@ import FooterActionLink from "./footerActionLink";
 import FooterServiceLink from "./footerServiceLink";
 import { Button } from "@/components/ui/button";
 
-export default function FooterComponent() {
+export default function FooterComponent({
+  setActivePage,
+  onOpenDevis,
+}: {
+  setActivePage: (page: number) => void;
+  onOpenDevis: () => void;
+}) {
     return (
         <div className="flex flex-col dark:text-white max-md:justify-start justify-between h-full gap-4">
             <div className="grid grid-cols-2 max-md:grid-cols-1 max-md:pb-10  border-b-1 border-black h-full max-md:h-full">
@@ -24,8 +30,12 @@ export default function FooterComponent() {
                 </div>
                 <div className="flex flex-col max-md:items-start max-md:mt-4 items-end gap-5">
                     <div className="flex items-start max-md:flex-col max-md:gap-4  justify-end gap-25">
-                        <FooterServiceLink />
-                        <FooterActionLink />
+      
+                        <FooterServiceLink setActivePage={setActivePage}/>
+                       <FooterActionLink
+      setActivePage={setActivePage}
+      onOpenDevis={onOpenDevis}
+    />
                     </div>
                     <div className="flex w-full justify-end max-md:hidden">
                         <FooterNewsLetter />

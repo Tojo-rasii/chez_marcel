@@ -1080,16 +1080,16 @@ export function RadialMenu({
 
         {!isMinimal && (
           <>
-          <div className="px-4 max-md:hidden top-0 pb-8 -mt-2">
-            <ThumbnailRail items={menuItems} activeIndex={activeIndex} onHover={handleHover} onSelect={handlePick} />
-          </div>
-          <div className="hidden max-md:flex">
-               <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed balance">
-                      {activeItem?.description}
-                    </p>
-          </div>
+            <div className="px-4 max-md:hidden top-0 pb-8 -mt-2">
+              <ThumbnailRail items={menuItems} activeIndex={activeIndex} onHover={handleHover} onSelect={handlePick} />
+            </div>
+            <div className="hidden max-md:flex">
+              <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed balance">
+                {activeItem?.description}
+              </p>
+            </div>
           </>
-          
+
         )}
 
         {!isMinimal && (

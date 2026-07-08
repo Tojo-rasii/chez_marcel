@@ -13,9 +13,11 @@ import HeroServiceContenu from "./heroServiceContenu";
 export default function SectionHero({
   activePage,
   setActivePage,
+  setOpenDevis
 }: {
   activePage: number;
   setActivePage: (page: number) => void;
+ setOpenDevis: (value: boolean) => void;
 }) {
   const gridRef = useRef<HTMLDivElement>(null);
 
@@ -75,7 +77,10 @@ export default function SectionHero({
         )}
 
         {activePage !== 1 && activePage !== 2 && activePage !== 3 && activePage !== 4 && activePage !== 5 && (
-          <FooterComponent />
+          <FooterComponent
+  setActivePage={setActivePage}
+  onOpenDevis={() => setOpenDevis(true)}
+/>
         )}
       </div>
     </div>

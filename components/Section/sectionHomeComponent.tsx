@@ -12,7 +12,11 @@ gsap.registerPlugin(Observer);
 
 const MAX_PAGE = 6;
 
-export default function SectionHomeComponent() {
+export default function SectionHomeComponent({
+  setOpenDevis,
+}: {
+  setOpenDevis: (value: boolean) => void;
+}) {
   const [activePage, setActivePage] = useState(1);
   const activePageRef = useRef(1);
   const isAnimating = useRef(false);
@@ -113,7 +117,7 @@ export default function SectionHomeComponent() {
   return (
     <div className="h-full pt-4  w-full relative overflow-hidden touch-pan-y">
       <div ref={heroWrapperRef} className="h-full flex items-center">
-        <SectionHero activePage={activePage} setActivePage={setActivePage}/>
+        <SectionHero setOpenDevis={setOpenDevis} activePage={activePage} setActivePage={setActivePage}/>
       </div>
 
       <div className="absolute max-md:hidden bottom-0 left-0">
