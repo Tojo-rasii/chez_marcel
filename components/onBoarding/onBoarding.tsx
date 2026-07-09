@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import OnBoardingComponent from "./onBoardingComponent";
+import Image from "next/image";
 
 export default function OnBoarding() {
   const [showOnboarding, setShowOnboarding] = useState(false);
@@ -30,8 +31,10 @@ const backgrounds = [
   return (
     <div className="fixed inset-0 z-[9999] overflow-hidden dark:bg-black/20 dark:text-white">
       <div className="absolute inset-0 -z-10">
-       <img
+       <Image
   key={backgroundIndex}
+  fill
+  alt="image"
   src={backgrounds[backgroundIndex]}
   className="h-full w-full scale-110 object-cover blur-xl transition-all duration-700"
 />

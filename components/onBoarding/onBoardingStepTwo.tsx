@@ -1,7 +1,6 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/lightswind/button";
 import DiagonalCarousel from "../ui/diagonal-carousel";
-import { DiagonalCarouselDemo } from "./diagonalCarouselDemo";
 import { Separator } from "../lightswind/separator";
 import { useEffect, useState } from "react";
 

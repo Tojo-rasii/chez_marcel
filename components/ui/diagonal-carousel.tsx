@@ -4,6 +4,8 @@ import * as React from "react";
 import { motion, type Transition } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+
 
 export interface DiagonalCarouselItem {
   src: string;
@@ -169,9 +171,10 @@ export function DiagonalCarousel({
                   onClick={() => selectSlide(index)}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={item.src}
                     alt={item.alt ?? item.title}
+                    fill
                     draggable={false}
                     className={cn(
                       "h-full w-full select-none rounded-2xl object-cover shadow-xl",
