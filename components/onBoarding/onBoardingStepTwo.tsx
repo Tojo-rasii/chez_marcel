@@ -58,9 +58,9 @@ export default function OnBoardingStepTwo({
                 className="h-full w-full text-neutral-800  dark:text-neutral-100"
             />
 
-            <div className="absolute left-0 bottom-0 p-7 flex flex-col gap-8 text-white text-left">
+            <div className="absolute max-md:w-full max-md:items-center max-md:gap-5 max-md:left-1/2 max-md:-translate-x-1/2 left-0 bottom-0 p-7 flex flex-col gap-8 text-white text-left">
 
-                <p className="max-w-md text-md text-white/70 transition-all duration-500">
+                <p className="max-w-md max-md:max-w-full max-md:text-center text-md text-white/70 transition-all duration-500">
                     {current.description}
                 </p>
                 <Separator className="w-25 max-sm:w-8 max-sm:w-5 h-0.5 bg-white/80" />
@@ -96,21 +96,21 @@ export default function OnBoardingStepTwo({
 
             </div>
 
-            <div className="absolute right-0 text-white px-7 flex items-end gap-4 justify-center flex-col  text-right">
+            <div className="absolute max-md:w-full max-md:left-1/2 max-md:-translate-x-1/2 right-0 text-white px-7 flex items-end max-md:items-center max-md:text-center gap-4 justify-center flex-col  text-right">
 
 
                 <h3
                     className=
-                    "morph-subtext mt-8 flex max-md:!text-[0.9em] items-center !text-wrap gap-4 font-heading uppercase text-white/80"
+                    "morph-subtext mt-8  flex max-md:!text-[0.9em] items-center !text-wrap gap-4 font-heading uppercase text-white/80"
                     style={{
                         opacity: 1,
                         animation: "morph-fade-up 1s text-white ease-out 1s forwards",
                     }}
                 >
-                    <Separator className="w-15 max-sm:w-8 max-sm:w-5 h-0.5 bg-yellow-500/50" /><span className="!text-wrap">Chez Marcel Click & Services</span>
-                </h3>
+                    <Separator className="w-15 max-sm:w-8 max-sm:w-5 h-0.5 bg-yellow-500/50" /><span className="!text-wrap max-md:text-center">Chez Marcel Click & Services</span>
+             <Separator className="w-15 max-sm:w-8 max-sm:w-5 h-0.5 bg-yellow-500/50" />   </h3>
 
-                <h1 className="text-6xl font-heading max-w-md whitespace-pre-line transition-all duration-500">
+                <h1 className="text-6xl max-md:text-4xl font-heading max-w-md whitespace-pre-line transition-all duration-500">
                     {current.heading}
                 </h1>
 

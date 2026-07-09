@@ -151,7 +151,7 @@ export function DiagonalCarousel({
                 transition={transition}
               >
                 <motion.p
-                  className={cn("whitespace-nowrap text-sm", labelClassName)}
+                  className={cn("whitespace-nowrap text-sm max-md:hidden", labelClassName)}
                   animate={{
                     opacity: isActive ? 1 : 0,
                     scale: isActive ? 1 : 0.7,
