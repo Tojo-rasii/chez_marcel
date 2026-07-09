@@ -3,9 +3,14 @@
 import { useState } from "react";
 import { MyHero } from "./myHero";
 import OnBoardingStepTwo from "./onBoardingStepTwo";
-import OnBoardingStepThree from "./onBoardingStepThree";
 
-export default function OnBoardingComponent() {
+export default function OnBoardingComponent({
+  onFinish,
+  onBackgroundChange,
+}: {
+  onFinish: () => void;
+  onBackgroundChange: (index: number) => void;
+}) {
   const [page, setPage] = useState(1);
 
   return (
@@ -16,17 +21,14 @@ export default function OnBoardingComponent() {
       )}
 
       {page === 2 && (
-        <OnBoardingStepTwo
-          onNext={() => setPage(3)}
-          onBack={() => setPage(1)}
-        />
+ <OnBoardingStepTwo
+  onNext={onFinish}
+  onBack={() => setPage(1)}
+  onBackgroundChange={onBackgroundChange}
+/>
       )}
 
-      {page === 3 && (
-        <OnBoardingStepThree
-          onBack={() => setPage(2)}
-        />
-      )}
+      
 
     </div>
   );

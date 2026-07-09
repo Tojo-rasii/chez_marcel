@@ -139,7 +139,7 @@ export function DiagonalCarousel({
               <motion.div
                 key={`${item.src}-${index}`}
                 className={cn(
-                  "flex shrink-0 flex-col items-center gap-2 will-change-transform",
+                  "flex shrink-0 flex-col items-center gap-2 m-5 -mt-7 will-change-transform",
                   slideClassName
                 )}
                 style={{ width: safeSlideSize }}
@@ -188,7 +188,7 @@ export function DiagonalCarousel({
       {showControls && (
         <div
           className={cn(
-            "absolute inset-x-4 bottom-5 z-10 mx-auto flex w-fit items-center justify-center gap-3 rounded-full border border-neutral-300/80 bg-neutral-200/70 px-2 text-neutral-700 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-neutral-900/70 dark:text-neutral-100",
+            "absolute inset-x-4 bottom-5 z-10 mx-auto !hidden w-fit items-center justify-center gap-3 rounded-full border border-neutral-300/80 bg-neutral-200/70 px-2 text-neutral-700 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-neutral-900/70 dark:text-neutral-100",
             controlsClassName
           )}
         >
