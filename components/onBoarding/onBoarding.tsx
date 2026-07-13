@@ -8,9 +8,9 @@ export default function OnBoarding() {
   const [showOnboarding, setShowOnboarding] = useState(false);
 const [backgroundIndex, setBackgroundIndex] = useState(0);
 const backgrounds = [
-  "/image.png",
-  "/mbl.png",
-  "/barber.png",
+  "/img.webp",
+  "/2.webp",
+  "/3.webp",
 ];
 
   useEffect(() => {

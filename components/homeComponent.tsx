@@ -13,7 +13,7 @@ export default function HomeComponent(setOpenDevis: (value: boolean) => void) {
         {/* Background */}
         <div className="absolute inset-0 -z-10">
           <img
-            src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=400&auto=format&fit=crop" // Remplace par ton image
+            src="/4.webp" // Remplace par ton image
             alt="Background"
             className="object-cover w-full h-full scale-110 blur-xl"
           />
